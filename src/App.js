@@ -1,5 +1,6 @@
 import "./App.css";
 import GameContainer from "./comps/GameContainer";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
