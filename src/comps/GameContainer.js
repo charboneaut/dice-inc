@@ -47,6 +47,7 @@ class GameContainer extends Component {
     let oldDice = this.state.dice.filter(function (die) {
       return die.id !== upgradedId;
     });
+    let oldSides = newDice[0].sides;
     newDice[0].sides++;
     let combinedDice = [...oldDice, newDice[0]];
     let sortedDice = combinedDice.sort(function (die1, die2) {
@@ -54,7 +55,7 @@ class GameContainer extends Component {
     });
     this.setState({
       dice: sortedDice,
-      cash: this.state.cash - newDice[0].sides * 1.6,
+      cash: this.state.cash - oldSides * 1.6,
     });
   };
   handleAlertClose = () => {
