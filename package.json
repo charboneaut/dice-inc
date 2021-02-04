@@ -12,6 +12,8 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
+    "vercel": "vercel dev",
+    "dev": "concurrently \"nodemon --watch api\" \"react-scripts start\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
