@@ -5,4 +5,9 @@
   margin-top: 10%;
   flex-wrap: wrap;
   align-self: center;
+  align-content: flex-start;
+}
+
+.playContainer {
+  flex-direction: column;
 }
