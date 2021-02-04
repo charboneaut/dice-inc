@@ -9,7 +9,15 @@ class GameContainer extends Component {
     dice: [
       {
         id: v4(),
-        sides: 6,
+        sides: 1,
+      },
+      {
+        id: v4(),
+        sides: 1,
+      },
+      {
+        id: v4(),
+        sides: 1,
       },
     ],
     cash: 0,
@@ -24,12 +32,31 @@ class GameContainer extends Component {
       cash: this.state.cash + rollTotal,
     });
   };
+  handleUpgradeDice = (upgradedId) => {
+    let oldDice = this.state.dice.filter(function (die) {
+      return die.id !== upgradedId;
+    });
+    let newDice = this.state.dice.filter(function (die) {
+      return die.id === upgradedId;
+    });
+    newDice[0].sides++;
+    let combinedDice = [...oldDice, newDice[0]];
+    let sortedDice = combinedDice.sort(function (die1, die2) {
+      return die2.sides - die1.sides;
+    });
+    this.setState({
+      dice: sortedDice,
+    });
+  };
   render() {
     return (
       <div className="gameContainer">
         <GameBar cash={this.state.cash} />
         <div className="playContainer">
-          <DiceContainer dice={this.state.dice} />
+          <DiceContainer
+            dice={this.state.dice}
+            handleUpgradeDice={this.handleUpgradeDice}
+          />
           <Button onClick={this.handleRoll}>Roll!</Button>
         </div>
       </div>
