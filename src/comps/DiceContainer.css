@@ -1,0 +1,13 @@
+div {
+  display: flex;
+}
+
+.mainContainer {
+  margin-top: 2vh;
+}
+
+.die {
+  display: flex;
+  flex-direction: column;
+  padding: 1vh;
+}

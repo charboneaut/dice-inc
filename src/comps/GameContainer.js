@@ -73,8 +73,8 @@ class GameContainer extends Component {
               handleUpgradeDice={this.handleUpgradeDice}
             />
             <Button onClick={this.handleRoll}>Roll!</Button>
-            <NeedsCash handleClose={this.handleAlertClose} />
           </div>
+          <NeedsCash handleClose={this.handleAlertClose} />
         </div>
       );
     }
