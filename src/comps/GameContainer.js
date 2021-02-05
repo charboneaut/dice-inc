@@ -34,6 +34,7 @@ class GameContainer extends Component {
       this.setState({
         show: true,
       });
+      this.handleAutoAlertClose();
       return;
     }
     let oldDice = this.state.dice.filter(function (die) {
@@ -50,11 +51,14 @@ class GameContainer extends Component {
       cash: this.state.cash - oldSides * 1.6,
     });
   };
-  handleAlertClose = () => {
-    this.setState({
-      show: false,
-    });
+  handleAutoAlertClose = () => {
+    setTimeout(() => {
+      this.setState({
+        show: false,
+      });
+    }, 2900);
   };
+
   render() {
     if (this.state.show) {
       return (
@@ -66,7 +70,7 @@ class GameContainer extends Component {
               handleUpgradeDice={this.handleUpgradeDice}
             />
             <Button onClick={this.handleRoll}>Roll!</Button>
-            <NeedsCash handleClose={this.handleAlertClose} />
+            <NeedsCash />
           </div>
         </div>
       );

@@ -1,7 +1,21 @@
 #cashAlert {
   margin-top: 3vh;
+  animation-name: alertFade;
+  animation-duration: 3s;
 }
 
 .close {
   margin-top: -1%;
+}
+
+@keyframes alertFade {
+  0% {
+    opacity: 100%;
+  }
+  90% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+  }
 }

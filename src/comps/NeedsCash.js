@@ -4,12 +4,7 @@ import "./NeedsCash.css";
 class NeedsCash extends Component {
   render() {
     return (
-      <Alert
-        id="cashAlert"
-        variant={"danger"}
-        dismissible
-        onClose={this.props.handleClose}
-      >
+      <Alert id="cashAlert" variant={"danger"}>
         You need more cash
       </Alert>
     );
