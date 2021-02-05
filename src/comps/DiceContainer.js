@@ -5,12 +5,19 @@ import Die from "./Die";
 
 class DiceContainer extends Component {
   render() {
+    let index = -1;
     return (
       <div className="mainContainer">
         {this.props.dice.map((die) => {
+          index++;
           return (
             <div key={die.id} className="die">
-              <Die sides={die.sides} />
+              <Die
+                sides={die.sides}
+                currentside={this.props.diceRolls[index]}
+              />
+              <p>D{die.sides}</p>
+              <p>Upgrade at ${Math.round(die.sides * 1.6)}</p>
               <Button onClick={() => this.props.handleUpgradeDice(die.id)}>
                 Upgrade!
               </Button>

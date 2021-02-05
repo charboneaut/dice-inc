@@ -3,7 +3,7 @@ import "./Die.css";
 
 class Die extends Component {
   createDie = () => {
-    switch (this.props.sides) {
+    switch (this.props.currentside) {
       case 1:
         return "O";
       case 2:

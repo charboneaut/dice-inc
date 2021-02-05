@@ -13,3 +13,7 @@ div {
   flex-direction: column;
   padding: 1vh;
 }
+
+p {
+  line-height: 1vh;
+}

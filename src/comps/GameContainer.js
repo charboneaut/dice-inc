@@ -18,14 +18,19 @@ class GameContainer extends Component {
     show: false,
     difference: 0,
     tooManySides: false,
+    currentRolls: [1],
   };
   handleRoll = () => {
     let rollTotal = 0;
+    let rolls = [];
     this.state.dice.map(function (die) {
-      rollTotal += Math.floor(Math.random() * (die.sides - 1 + 1)) + 1;
+      let roll = Math.floor(Math.random() * (die.sides - 1 + 1)) + 1;
+      rollTotal += roll;
+      rolls.push(roll);
       return null;
     });
     this.setState({
+      currentRolls: rolls,
       cash: this.state.cash + rollTotal,
     });
   };
@@ -106,6 +111,7 @@ class GameContainer extends Component {
             <DiceContainer
               dice={this.state.dice}
               handleUpgradeDice={this.handleUpgradeDice}
+              diceRolls={this.state.currentRolls}
             />
             <Button onClick={this.handleRoll}>Roll!</Button>
             <NeedsCash difference={this.state.difference} />
@@ -125,6 +131,7 @@ class GameContainer extends Component {
             <DiceContainer
               dice={this.state.dice}
               handleUpgradeDice={this.handleUpgradeDice}
+              diceRolls={this.state.currentRolls}
             />
             <Button onClick={this.handleRoll}>Roll!</Button>
             <TooManySides difference={this.state.difference} />
@@ -143,6 +150,7 @@ class GameContainer extends Component {
           <DiceContainer
             dice={this.state.dice}
             handleUpgradeDice={this.handleUpgradeDice}
+            diceRolls={this.state.currentRolls}
           />
           <Button onClick={this.handleRoll}>Roll!</Button>
         </div>
