@@ -5,6 +5,7 @@ import DiceContainer from "./DiceContainer";
 import Button from "react-bootstrap/Button";
 import { v4 } from "uuid";
 import NeedsCash from "./NeedsCash";
+import TooManySides from "./TooManySides";
 class GameContainer extends Component {
   state = {
     dice: [
@@ -16,6 +17,7 @@ class GameContainer extends Component {
     cash: 0,
     show: false,
     difference: 0,
+    tooManySides: false,
   };
   handleRoll = () => {
     let rollTotal = 0;
@@ -41,6 +43,10 @@ class GameContainer extends Component {
       return;
     }
     if (newDice[0].sides >= 6) {
+      this.setState({
+        tooManySides: true,
+      });
+      this.handleAutoAlertClose();
       return;
     }
     let oldDice = this.state.dice.filter(function (die) {
@@ -60,6 +66,7 @@ class GameContainer extends Component {
     setTimeout(() => {
       this.setState({
         show: false,
+        tooManySides: false,
       });
     }, 2900);
   };
@@ -76,6 +83,21 @@ class GameContainer extends Component {
             />
             <Button onClick={this.handleRoll}>Roll!</Button>
             <NeedsCash difference={this.state.difference} />
+          </div>
+        </div>
+      );
+    }
+    if (this.state.tooManySides) {
+      return (
+        <div className="gameContainer">
+          <GameBar cash={this.state.cash} />
+          <div className="playContainer">
+            <DiceContainer
+              dice={this.state.dice}
+              handleUpgradeDice={this.handleUpgradeDice}
+            />
+            <Button onClick={this.handleRoll}>Roll!</Button>
+            <TooManySides difference={this.state.difference} />
           </div>
         </div>
       );

@@ -4,10 +4,6 @@
   animation-duration: 3s;
 }
 
-.close {
-  margin-top: -1%;
-}
-
 @keyframes alertFade {
   0% {
     opacity: 100%;
