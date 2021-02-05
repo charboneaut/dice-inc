@@ -10,11 +10,12 @@ class GameContainer extends Component {
     dice: [
       {
         id: v4(),
-        sides: 1,
+        sides: 5,
       },
     ],
     cash: 0,
     show: false,
+    difference: 0,
   };
   handleRoll = () => {
     let rollTotal = 0;
@@ -30,17 +31,21 @@ class GameContainer extends Component {
     let newDice = this.state.dice.filter(function (die) {
       return die.id === upgradedId;
     });
-    if (this.state.cash < newDice[0].sides * 1.6) {
+    let upgradeCost = Math.round(newDice[0].sides * 1.6);
+    if (this.state.cash < upgradeCost) {
       this.setState({
         show: true,
+        difference: this.state.cash - upgradeCost,
       });
       this.handleAutoAlertClose();
+      return;
+    }
+    if (newDice[0].sides >= 6) {
       return;
     }
     let oldDice = this.state.dice.filter(function (die) {
       return die.id !== upgradedId;
     });
-    let oldSides = newDice[0].sides;
     newDice[0].sides++;
     let combinedDice = [...oldDice, newDice[0]];
     let sortedDice = combinedDice.sort(function (die1, die2) {
@@ -48,7 +53,7 @@ class GameContainer extends Component {
     });
     this.setState({
       dice: sortedDice,
-      cash: this.state.cash - oldSides * 1.6,
+      cash: this.state.cash - upgradeCost,
     });
   };
   handleAutoAlertClose = () => {
@@ -70,7 +75,7 @@ class GameContainer extends Component {
               handleUpgradeDice={this.handleUpgradeDice}
             />
             <Button onClick={this.handleRoll}>Roll!</Button>
-            <NeedsCash />
+            <NeedsCash difference={this.state.difference} />
           </div>
         </div>
       );

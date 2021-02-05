@@ -5,7 +5,7 @@ class NeedsCash extends Component {
   render() {
     return (
       <Alert id="cashAlert" variant={"danger"}>
-        You need more cash
+        You need ${-this.props.difference} more.
       </Alert>
     );
   }
