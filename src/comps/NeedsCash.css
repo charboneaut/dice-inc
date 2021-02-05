@@ -5,7 +5,7 @@
   position: absolute;
 }
 
-@keyframes alertFade {
+/* @keyframes alertFade {
   0% {
     opacity: 100%;
   }
@@ -15,4 +15,4 @@
   100% {
     opacity: 0%;
   }
-}
+} */
