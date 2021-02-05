@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import { Component } from "react";
 import "./DiceContainer.css";
+import Die from "./Die";
 
 class DiceContainer extends Component {
   render() {
@@ -9,7 +10,7 @@ class DiceContainer extends Component {
         {this.props.dice.map((die) => {
           return (
             <div key={die.id} className="die">
-              This is a d{die.sides}
+              <Die sides={die.sides} />
               <Button onClick={() => this.props.handleUpgradeDice(die.id)}>
                 Upgrade!
               </Button>

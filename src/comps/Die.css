@@ -1,0 +1,23 @@
+.indvDie {
+  border: 1px solid black;
+  width: 14.2vh;
+  height: 13vh;
+  margin-bottom: 10%;
+  border-radius: 15%;
+  display: flex;
+  text-align: center;
+  font-size: 3.5vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.four {
+  display: flex;
+  flex-direction: column;
+}
+
+.five {
+  display: flex;
+  flex-direction: column;
+  line-height: 3vh;
+}

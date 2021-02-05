@@ -12,14 +12,14 @@ class GameContainer extends Component {
         id: v4(),
         sides: 1,
       },
-      {
-        id: v4(),
-        sides: 1,
-      },
-      {
-        id: v4(),
-        sides: 1,
-      },
+      //   {
+      //     id: v4(),
+      //     sides: 1,
+      //   },
+      //   {
+      //     id: v4(),
+      //     sides: 1,
+      //   },
     ],
     cash: 0,
     show: false,
