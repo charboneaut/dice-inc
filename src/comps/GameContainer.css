@@ -1,22 +1,56 @@
 .gameContainer {
-  width: 900px;
-  height: 600px;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
   border: 1px solid black;
-  margin-top: 10%;
   flex-wrap: wrap;
   align-self: center;
   align-content: flex-start;
+  background-image: linear-gradient(black, rgb(25, 25, 25));
+  color: whitesmoke;
 }
 
 .playContainer {
   flex-direction: column;
+  height: 75%;
+  align-self: start;
+  display: flex;
 }
 
-@keyframes alertFade {
-  from {
-    opacity: 100%;
+#rollButton {
+  background-color: black;
+  width: 6vw;
+  font-size: large;
+  font-weight: 600;
+  font-style: italic;
+  background-image: repeating-linear-gradient(
+    to left,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red,
+    violet
+  );
+  color: transparent;
+  background-clip: text;
+  animation: rainbow 8s ease infinite;
+  background-size: 800% 800%;
+  border: 2px solid white;
+  border-radius: 15%;
+  min-width: 60px;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
   }
-  to {
-    opacity: 0%;
+  50% {
+    background-position: 100% 25%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

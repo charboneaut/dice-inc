@@ -2,7 +2,6 @@ import "./GameContainer.css";
 import { Component } from "react";
 import GameBar from "./GameBar";
 import DiceContainer from "./DiceContainer";
-import Button from "react-bootstrap/Button";
 import { v4 } from "uuid";
 import NeedsCash from "./NeedsCash";
 import TooManySides from "./TooManySides";
@@ -19,6 +18,7 @@ class GameContainer extends Component {
     difference: 0,
     tooManySides: false,
     currentRolls: [1],
+    alertTimeout: null,
   };
   handleRoll = () => {
     let rollTotal = 0;
@@ -38,7 +38,7 @@ class GameContainer extends Component {
     let newDice = this.state.dice.filter(function (die) {
       return die.id === upgradedId;
     });
-    let upgradeCost = Math.round(newDice[0].sides * 1.6);
+    let upgradeCost = Math.round((newDice[0].sides * 1.6) ** 3);
     if (this.state.cash < upgradeCost) {
       this.setState({
         show: true,
@@ -90,12 +90,18 @@ class GameContainer extends Component {
     });
   };
   handleAutoAlertClose = () => {
-    setTimeout(() => {
-      this.setState({
-        show: false,
-        tooManySides: false,
-      });
-    }, 2900);
+    if (this.state.alertTimeout) {
+      return;
+    }
+    this.setState({
+      alertTimeout: setTimeout(() => {
+        this.setState({
+          show: false,
+          tooManySides: false,
+          alertTimeout: null,
+        });
+      }, 2900),
+    });
   };
 
   render() {
@@ -106,6 +112,7 @@ class GameContainer extends Component {
             cash={this.state.cash}
             handleAddDice={this.handleAddDice}
             diceAmount={this.state.dice.length}
+            handleRoll={this.handleRoll}
           />
           <div className="playContainer">
             <DiceContainer
@@ -113,7 +120,6 @@ class GameContainer extends Component {
               handleUpgradeDice={this.handleUpgradeDice}
               diceRolls={this.state.currentRolls}
             />
-            <Button onClick={this.handleRoll}>Roll!</Button>
             <NeedsCash difference={this.state.difference} />
           </div>
         </div>
@@ -126,6 +132,7 @@ class GameContainer extends Component {
             cash={this.state.cash}
             handleAddDice={this.handleAddDice}
             diceAmount={this.state.dice.length}
+            handleRoll={this.handleRoll}
           />
           <div className="playContainer">
             <DiceContainer
@@ -133,7 +140,6 @@ class GameContainer extends Component {
               handleUpgradeDice={this.handleUpgradeDice}
               diceRolls={this.state.currentRolls}
             />
-            <Button onClick={this.handleRoll}>Roll!</Button>
             <TooManySides difference={this.state.difference} />
           </div>
         </div>
@@ -145,6 +151,7 @@ class GameContainer extends Component {
           cash={this.state.cash}
           handleAddDice={this.handleAddDice}
           diceAmount={this.state.dice.length}
+          handleRoll={this.handleRoll}
         />
         <div className="playContainer">
           <DiceContainer
@@ -152,7 +159,6 @@ class GameContainer extends Component {
             handleUpgradeDice={this.handleUpgradeDice}
             diceRolls={this.state.currentRolls}
           />
-          <Button onClick={this.handleRoll}>Roll!</Button>
         </div>
       </div>
     );

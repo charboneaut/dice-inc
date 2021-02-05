@@ -17,3 +17,8 @@ div {
 p {
   line-height: 1vh;
 }
+
+#upgradeButton {
+  background-color: black;
+  border-color: whitesmoke;
+}

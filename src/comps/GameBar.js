@@ -3,12 +3,13 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "./GameBar.css";
+import { Button } from "react-bootstrap";
 
 class GameBar extends Component {
   render() {
     return (
-      <Navbar bg="light" expand="lg" id="gameBar">
-        <Navbar.Brand href="#home">${this.props.cash}</Navbar.Brand>
+      <Navbar variant="dark" expand="lg" id="gameBar">
+        <Navbar.Brand>${this.props.cash}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -23,6 +24,9 @@ class GameBar extends Component {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
+        <Button id="rollButton" onClick={this.props.handleRoll}>
+          Roll!
+        </Button>
       </Navbar>
     );
   }

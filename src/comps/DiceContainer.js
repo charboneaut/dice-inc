@@ -17,9 +17,12 @@ class DiceContainer extends Component {
                 currentside={this.props.diceRolls[index]}
               />
               <p>D{die.sides}</p>
-              <p>Upgrade at ${Math.round(die.sides * 1.6)}</p>
-              <Button onClick={() => this.props.handleUpgradeDice(die.id)}>
-                Upgrade!
+              <p>Upgrade at ${Math.round((die.sides * 1.6) ** 3)}</p>
+              <Button
+                onClick={() => this.props.handleUpgradeDice(die.id)}
+                id="upgradeButton"
+              >
+                Upgrade
               </Button>
             </div>
           );
