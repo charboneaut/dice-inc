@@ -11,7 +11,7 @@ class GameContainer extends Component {
     dice: [
       {
         id: v4(),
-        sides: 5,
+        sides: 1,
       },
     ],
     cash: 0,
@@ -62,6 +62,28 @@ class GameContainer extends Component {
       cash: this.state.cash - upgradeCost,
     });
   };
+  handleAddDice = () => {
+    const diceCost = (this.state.dice.length * 10) ** 3;
+    if (this.state.cash < diceCost) {
+      this.setState({
+        show: true,
+        difference: this.state.cash - diceCost,
+      });
+      this.handleAutoAlertClose();
+      return;
+    }
+    if (this.state.dice.length >= 12) {
+      this.setState({
+        tooManySides: true,
+      });
+      this.handleAutoAlertClose();
+      return;
+    }
+    this.setState({
+      dice: [...this.state.dice, { id: v4(), sides: 1 }],
+      cash: this.state.cash - diceCost,
+    });
+  };
   handleAutoAlertClose = () => {
     setTimeout(() => {
       this.setState({
@@ -75,7 +97,11 @@ class GameContainer extends Component {
     if (this.state.show) {
       return (
         <div className="gameContainer">
-          <GameBar cash={this.state.cash} />
+          <GameBar
+            cash={this.state.cash}
+            handleAddDice={this.handleAddDice}
+            diceAmount={this.state.dice.length}
+          />
           <div className="playContainer">
             <DiceContainer
               dice={this.state.dice}
@@ -90,7 +116,11 @@ class GameContainer extends Component {
     if (this.state.tooManySides) {
       return (
         <div className="gameContainer">
-          <GameBar cash={this.state.cash} />
+          <GameBar
+            cash={this.state.cash}
+            handleAddDice={this.handleAddDice}
+            diceAmount={this.state.dice.length}
+          />
           <div className="playContainer">
             <DiceContainer
               dice={this.state.dice}
@@ -104,7 +134,11 @@ class GameContainer extends Component {
     }
     return (
       <div className="gameContainer">
-        <GameBar cash={this.state.cash} />
+        <GameBar
+          cash={this.state.cash}
+          handleAddDice={this.handleAddDice}
+          diceAmount={this.state.dice.length}
+        />
         <div className="playContainer">
           <DiceContainer
             dice={this.state.dice}
