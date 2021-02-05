@@ -4,6 +4,8 @@ div {
 
 .mainContainer {
   margin-top: 2vh;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .die {

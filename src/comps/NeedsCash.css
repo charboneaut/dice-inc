@@ -1,3 +1,7 @@
 #cashAlert {
-  position: absolute;
+  margin-top: 3vh;
+}
+
+.close {
+  margin-top: -1%;
 }
