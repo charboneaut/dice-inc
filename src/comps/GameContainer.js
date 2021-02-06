@@ -68,7 +68,7 @@ class GameContainer extends Component {
     });
   };
   handleAddDice = () => {
-    const diceCost = (this.state.dice.length * 10) ** 3;
+    const diceCost = (this.state.dice.length * 6) ** 3;
     if (this.state.cash < diceCost) {
       this.setState({
         show: true,
