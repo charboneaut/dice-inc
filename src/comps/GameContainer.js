@@ -13,7 +13,7 @@ class GameContainer extends Component {
         sides: 1,
       },
     ],
-    cash: 1000,
+    cash: 0,
     show: false,
     difference: 0,
     tooManySides: false,
@@ -40,19 +40,39 @@ class GameContainer extends Component {
       }
       return null;
     });
-    Object.values(rollsObj).map((roll) => {
-      if (roll === 2) {
-        this.setState({
-          combo: "Double! x2",
-        });
-        rollTotal = rollTotal * 2;
-      } else {
-        this.setState({
-          combo: null,
-        });
-      }
-      return null;
+    let sortedRolls = Object.values(rollsObj).sort((a, b) => {
+      return b - a;
     });
+    if (sortedRolls[0] === 5) {
+      this.setState({
+        combo: "Quintuple!!!! x25",
+      });
+      rollTotal = rollTotal * 25;
+    } else if (sortedRolls[0] >= 3 && sortedRolls[1] >= 2) {
+      this.setState({
+        combo: "Full House!!! x18",
+      });
+      rollTotal = rollTotal * 18;
+    } else if (sortedRolls[0] === 4) {
+      this.setState({
+        combo: "Quadruple!!! x12",
+      });
+      rollTotal = rollTotal * 16;
+    } else if (sortedRolls[0] === 3) {
+      this.setState({
+        combo: "Triple!! x6",
+      });
+      rollTotal = rollTotal * 6;
+    } else if (sortedRolls[0] === 2) {
+      this.setState({
+        combo: "Double! x2",
+      });
+      rollTotal = rollTotal * 2;
+    } else {
+      this.setState({
+        combo: null,
+      });
+    }
     this.setState({
       currentRolls: rolls,
       cash: this.state.cash + rollTotal,
