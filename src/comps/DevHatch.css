@@ -1,0 +1,12 @@
+.dev {
+  font-style: italic;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0.5%;
+}
+
+.dev:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

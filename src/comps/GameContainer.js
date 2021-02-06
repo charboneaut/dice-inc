@@ -5,6 +5,7 @@ import DiceContainer from "./DiceContainer";
 import { v4 } from "uuid";
 import NeedsCash from "./NeedsCash";
 import TooManySides from "./TooManySides";
+import DevHatch from "./DevHatch";
 class GameContainer extends Component {
   state = {
     dice: [
@@ -21,6 +22,7 @@ class GameContainer extends Component {
     alertTimeout: null,
     combo: null,
     lastRoll: 0,
+    dev: false,
   };
   handleRoll = () => {
     let rollTotal = 0;
@@ -149,6 +151,13 @@ class GameContainer extends Component {
     });
   };
 
+  handleCheatMode = () => {
+    this.setState({
+      cash: Number.MAX_SAFE_INTEGER,
+      dev: true,
+    });
+  };
+
   render() {
     if (this.state.show) {
       return (
@@ -194,6 +203,27 @@ class GameContainer extends Component {
         </div>
       );
     }
+    if (this.state.dev) {
+      return (
+        <div className="gameContainer">
+          <GameBar
+            cash={this.state.cash}
+            handleAddDice={this.handleAddDice}
+            diceAmount={this.state.dice.length}
+            handleRoll={this.handleRoll}
+            combo={this.state.combo}
+            lastRoll={this.state.lastRoll}
+          />
+          <div className="playContainer">
+            <DiceContainer
+              dice={this.state.dice}
+              handleUpgradeDice={this.handleUpgradeDice}
+              diceRolls={this.state.currentRolls}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="gameContainer">
         <GameBar
@@ -211,6 +241,7 @@ class GameContainer extends Component {
             diceRolls={this.state.currentRolls}
           />
         </div>
+        <DevHatch onClick={this.handleCheatMode} />
       </div>
     );
   }
