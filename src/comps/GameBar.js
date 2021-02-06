@@ -24,6 +24,12 @@ class GameBar extends Component {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
+        <Nav.Item className="combo">
+          <p>{this.props.combo}</p>
+        </Nav.Item>
+        <Nav.Item className="lastRoll">
+          <p>Last Roll: {this.props.lastRoll}</p>
+        </Nav.Item>
         <Button id="rollButton" onClick={this.props.handleRoll}>
           Roll!
         </Button>

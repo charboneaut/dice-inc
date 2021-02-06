@@ -13,12 +13,14 @@ class GameContainer extends Component {
         sides: 1,
       },
     ],
-    cash: 0,
+    cash: 1000,
     show: false,
     difference: 0,
     tooManySides: false,
     currentRolls: [1],
     alertTimeout: null,
+    combo: null,
+    lastRoll: 0,
   };
   handleRoll = () => {
     let rollTotal = 0;
@@ -29,9 +31,32 @@ class GameContainer extends Component {
       rolls.push(roll);
       return null;
     });
+    let rollsObj = {};
+    rolls.map(function (roll) {
+      if (rollsObj[roll] === undefined) {
+        rollsObj[roll] = 1;
+      } else {
+        rollsObj[roll]++;
+      }
+      return null;
+    });
+    Object.values(rollsObj).map((roll) => {
+      if (roll === 2) {
+        this.setState({
+          combo: "Double! x2",
+        });
+        rollTotal = rollTotal * 2;
+      } else {
+        this.setState({
+          combo: null,
+        });
+      }
+      return null;
+    });
     this.setState({
       currentRolls: rolls,
       cash: this.state.cash + rollTotal,
+      lastRoll: rollTotal,
     });
   };
   handleUpgradeDice = (upgradedId) => {
@@ -113,6 +138,8 @@ class GameContainer extends Component {
             handleAddDice={this.handleAddDice}
             diceAmount={this.state.dice.length}
             handleRoll={this.handleRoll}
+            combo={this.state.combo}
+            lastRoll={this.state.lastRoll}
           />
           <div className="playContainer">
             <DiceContainer
@@ -133,6 +160,8 @@ class GameContainer extends Component {
             handleAddDice={this.handleAddDice}
             diceAmount={this.state.dice.length}
             handleRoll={this.handleRoll}
+            combo={this.state.combo}
+            lastRoll={this.state.lastRoll}
           />
           <div className="playContainer">
             <DiceContainer
@@ -152,6 +181,8 @@ class GameContainer extends Component {
           handleAddDice={this.handleAddDice}
           diceAmount={this.state.dice.length}
           handleRoll={this.handleRoll}
+          combo={this.state.combo}
+          lastRoll={this.state.lastRoll}
         />
         <div className="playContainer">
           <DiceContainer
