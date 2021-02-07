@@ -117,12 +117,12 @@ class GameContainer extends Component {
         mulRolls.push(roll);
         return null;
       });
-      let rollsObj = {};
-      rolls.map(function (roll) {
-        if (rollsObj[roll] === undefined) {
-          rollsObj[roll] = 1;
+      let rollsMulObj = {};
+      mulRolls.map(function (roll) {
+        if (rollsMulObj[roll] === undefined) {
+          rollsMulObj[roll] = 1;
         } else {
-          rollsObj[roll]++;
+          rollsMulObj[roll]++;
         }
         return null;
       });
@@ -133,27 +133,27 @@ class GameContainer extends Component {
         this.setState({
           mulCombo: "Quintuple!!!! x25",
         });
-        rollTotal = rollTotal * 25;
+        mulRollTotal = mulRollTotal * 25;
       } else if (sortedRolls[0] >= 3 && sortedRolls[1] >= 2) {
         this.setState({
           mulCombo: "Full House!!! x18",
         });
-        rollTotal = rollTotal * 18;
+        mulRollTotal = mulRollTotal * 18;
       } else if (sortedRolls[0] === 4) {
         this.setState({
           mulCombo: "Quadruple!!! x12",
         });
-        rollTotal = rollTotal * 16;
+        mulRollTotal = mulRollTotal * 16;
       } else if (sortedRolls[0] === 3) {
         this.setState({
           mulCombo: "Triple!! x6",
         });
-        rollTotal = rollTotal * 6;
+        mulRollTotal = mulRollTotal * 6;
       } else if (sortedRolls[0] === 2) {
         this.setState({
           mulCombo: "Double! x2",
         });
-        rollTotal = rollTotal * 2;
+        mulRollTotal = mulRollTotal * 2;
       } else {
         this.setState({
           mulCombo: null,
