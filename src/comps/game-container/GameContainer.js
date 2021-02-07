@@ -30,7 +30,7 @@ class GameContainer extends Component {
     lastNaturalRoll: 0,
     dev: false,
   };
-  handleAddMulDice = () => {
+  handleAddMulDie = () => {
     let mulDiceStart = this.state.mulDice.length + 1;
     const diceCost = (mulDiceStart * 10) ** 4;
     if (this.state.cash < diceCost) {
@@ -72,7 +72,7 @@ class GameContainer extends Component {
       combo: rollData.comboData.comboStr,
     });
   };
-  handleUpgradeDice = (upgradedId) => {
+  handleUpgradeDie = (upgradedId) => {
     let newDice = this.state.dice.filter(function (die) {
       return die.id === upgradedId;
     });
@@ -105,7 +105,7 @@ class GameContainer extends Component {
       cash: this.state.cash - upgradeCost,
     });
   };
-  handleUpgradeMulDice = (upgradedId) => {
+  handleUpgradeMulDie = (upgradedId) => {
     let newDice = this.state.mulDice.filter(function (die) {
       return die.id === upgradedId;
     });
@@ -138,7 +138,7 @@ class GameContainer extends Component {
       cash: this.state.cash - upgradeCost,
     });
   };
-  handleAddDice = () => {
+  handleAddDie = () => {
     const diceCost = (this.state.dice.length * 6) ** 3;
     if (this.state.cash < diceCost) {
       this.setState({
@@ -176,7 +176,7 @@ class GameContainer extends Component {
     });
   };
 
-  handleCheatMode = () => {
+  handleDevMode = () => {
     this.setState({
       cash: Number.MAX_SAFE_INTEGER,
       dev: true,
@@ -188,12 +188,12 @@ class GameContainer extends Component {
       <div className="gameContainer">
         <GameBar
           cash={this.state.cash}
-          handleAddDice={this.handleAddDice}
+          addDie={this.handleAddDie}
           diceAmount={this.state.dice.length}
-          handleRoll={this.handleRoll}
+          roll={this.handleRoll}
           combo={this.state.combo}
           lastRoll={this.state.lastRoll}
-          handleAddMulDice={this.handleAddMulDice}
+          addMulDie={this.handleAddMulDie}
           mulDiceAmount={this.state.mulDice.length}
           lastMulRoll={this.state.lastMulRoll}
           lastNaturalRoll={this.state.lastNaturalRoll}
@@ -201,10 +201,10 @@ class GameContainer extends Component {
         <div className="playContainer">
           <DiceContainer
             dice={this.state.dice}
-            handleUpgradeDice={this.handleUpgradeDice}
+            upgradeDie={this.handleUpgradeDie}
             diceRolls={this.state.currentRolls}
             mulDice={this.state.mulDice}
-            handleUpgradeMulDice={this.handleUpgradeMulDice}
+            upgradeMulDie={this.handleUpgradeMulDie}
             currentMulRolls={this.state.currentMulRolls}
           />
         </div>
@@ -214,7 +214,7 @@ class GameContainer extends Component {
         {this.state.tooManySides ? (
           <TooManySides difference={this.state.difference} />
         ) : null}
-        {!this.state.dev ? <DevHatch onClick={this.handleCheatMode} /> : null}
+        {!this.state.dev ? <DevHatch onClick={this.handleDevMode} /> : null}
       </div>
     );
   }
