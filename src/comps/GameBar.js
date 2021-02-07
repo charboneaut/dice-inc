@@ -6,6 +6,11 @@ import "./GameBar.css";
 import { Button } from "react-bootstrap";
 
 class GameBar extends Component {
+  checkIfMul = () => {
+    if (this.props.lastMulRoll) {
+      return " x " + this.props.lastMulRoll;
+    }
+  };
   render() {
     let mulDiceStart = this.props.mulDiceAmount + 1;
     return (
@@ -29,7 +34,9 @@ class GameBar extends Component {
           <p>{this.props.combo}</p>
         </Nav.Item>
         <Nav.Item className="lastRoll">
-          <p>Last Roll: {this.props.lastRoll}</p>
+          <p>Last Roll: {this.props.lastNaturalRoll}</p>
+          <p>{this.checkIfMul()}</p>
+          <p>, totaling {this.props.lastRoll}</p>
         </Nav.Item>
         <Button id="rollButton" onClick={this.props.handleRoll}>
           Roll!

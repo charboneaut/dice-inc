@@ -26,6 +26,7 @@ class GameContainer extends Component {
     mulCombo: null,
     lastMulRoll: null,
     lastRoll: 0,
+    lastNaturalRoll: 0,
     dev: false,
   };
   handleAddMulDice = () => {
@@ -76,6 +77,9 @@ class GameContainer extends Component {
         rollsObj[roll]++;
       }
       return null;
+    });
+    this.setState({
+      lastNaturalRoll: rollTotal,
     });
     let sortedRolls = Object.values(rollsObj).sort((a, b) => {
       return b - a;
@@ -304,6 +308,8 @@ class GameContainer extends Component {
             lastRoll={this.state.lastRoll}
             handleAddMulDice={this.handleAddMulDice}
             mulDiceAmount={this.state.mulDice.length}
+            lastMulRoll={this.state.lastMulRoll}
+            lastNaturalRoll={this.state.lastNaturalRoll}
           />
           <div className="playContainer">
             <DiceContainer
@@ -331,6 +337,8 @@ class GameContainer extends Component {
             lastRoll={this.state.lastRoll}
             handleAddMulDice={this.handleAddMulDice}
             mulDiceAmount={this.state.mulDice.length}
+            lastMulRoll={this.state.lastMulRoll}
+            lastNaturalRoll={this.state.lastNaturalRoll}
           />
           <div className="playContainer">
             <DiceContainer
@@ -358,6 +366,8 @@ class GameContainer extends Component {
             lastRoll={this.state.lastRoll}
             handleAddMulDice={this.handleAddMulDice}
             mulDiceAmount={this.state.mulDice.length}
+            lastMulRoll={this.state.lastMulRoll}
+            lastNaturalRoll={this.state.lastNaturalRoll}
           />
           <div className="playContainer">
             <DiceContainer
@@ -383,6 +393,8 @@ class GameContainer extends Component {
           lastRoll={this.state.lastRoll}
           handleAddMulDice={this.handleAddMulDice}
           mulDiceAmount={this.state.mulDice.length}
+          lastMulRoll={this.state.lastMulRoll}
+          lastNaturalRoll={this.state.lastNaturalRoll}
         />
         <div className="playContainer">
           <DiceContainer
