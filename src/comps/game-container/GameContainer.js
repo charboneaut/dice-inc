@@ -184,92 +184,6 @@ class GameContainer extends Component {
   };
 
   render() {
-    if (this.state.show) {
-      return (
-        <div className="gameContainer">
-          <GameBar
-            cash={this.state.cash}
-            handleAddDice={this.handleAddDice}
-            diceAmount={this.state.dice.length}
-            handleRoll={this.handleRoll}
-            combo={this.state.combo}
-            lastRoll={this.state.lastRoll}
-            handleAddMulDice={this.handleAddMulDice}
-            mulDiceAmount={this.state.mulDice.length}
-            lastMulRoll={this.state.lastMulRoll}
-            lastNaturalRoll={this.state.lastNaturalRoll}
-          />
-          <div className="playContainer">
-            <DiceContainer
-              dice={this.state.dice}
-              handleUpgradeDice={this.handleUpgradeDice}
-              diceRolls={this.state.currentRolls}
-              mulDice={this.state.mulDice}
-              handleUpgradeMulDice={this.handleUpgradeMulDice}
-              currentMulRolls={this.state.currentMulRolls}
-            />
-            <NeedsCash difference={this.state.difference} />
-          </div>
-        </div>
-      );
-    }
-    if (this.state.tooManySides) {
-      return (
-        <div className="gameContainer">
-          <GameBar
-            cash={this.state.cash}
-            handleAddDice={this.handleAddDice}
-            diceAmount={this.state.dice.length}
-            handleRoll={this.handleRoll}
-            combo={this.state.combo}
-            lastRoll={this.state.lastRoll}
-            handleAddMulDice={this.handleAddMulDice}
-            mulDiceAmount={this.state.mulDice.length}
-            lastMulRoll={this.state.lastMulRoll}
-            lastNaturalRoll={this.state.lastNaturalRoll}
-          />
-          <div className="playContainer">
-            <DiceContainer
-              dice={this.state.dice}
-              handleUpgradeDice={this.handleUpgradeDice}
-              diceRolls={this.state.currentRolls}
-              mulDice={this.state.mulDice}
-              handleUpgradeMulDice={this.handleUpgradeMulDice}
-              currentMulRolls={this.state.currentMulRolls}
-            />
-            <TooManySides difference={this.state.difference} />
-          </div>
-        </div>
-      );
-    }
-    if (this.state.dev) {
-      return (
-        <div className="gameContainer">
-          <GameBar
-            cash={this.state.cash}
-            handleAddDice={this.handleAddDice}
-            diceAmount={this.state.dice.length}
-            handleRoll={this.handleRoll}
-            combo={this.state.combo}
-            lastRoll={this.state.lastRoll}
-            handleAddMulDice={this.handleAddMulDice}
-            mulDiceAmount={this.state.mulDice.length}
-            lastMulRoll={this.state.lastMulRoll}
-            lastNaturalRoll={this.state.lastNaturalRoll}
-          />
-          <div className="playContainer">
-            <DiceContainer
-              dice={this.state.dice}
-              handleUpgradeDice={this.handleUpgradeDice}
-              diceRolls={this.state.currentRolls}
-              mulDice={this.state.mulDice}
-              handleUpgradeMulDice={this.handleUpgradeMulDice}
-              currentMulRolls={this.state.currentMulRolls}
-            />
-          </div>
-        </div>
-      );
-    }
     return (
       <div className="gameContainer">
         <GameBar
@@ -294,7 +208,13 @@ class GameContainer extends Component {
             currentMulRolls={this.state.currentMulRolls}
           />
         </div>
-        <DevHatch onClick={this.handleCheatMode} />
+        {this.state.show ? (
+          <NeedsCash difference={this.state.difference} />
+        ) : null}
+        {this.state.tooManySides ? (
+          <TooManySides difference={this.state.difference} />
+        ) : null}
+        {!this.state.dev ? <DevHatch onClick={this.handleCheatMode} /> : null}
       </div>
     );
   }
