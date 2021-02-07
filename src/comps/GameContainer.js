@@ -80,7 +80,12 @@ class GameContainer extends Component {
     let sortedRolls = Object.values(rollsObj).sort((a, b) => {
       return b - a;
     });
-    if (sortedRolls[0] === 5) {
+    if (sortedRolls[0] === 6) {
+      this.setState({
+        combo: "Sextuple!!!! x50",
+      });
+      rollTotal = rollTotal * 50;
+    } else if (sortedRolls[0] === 5) {
       this.setState({
         combo: "Quintuple!!!! x25",
       });
@@ -129,7 +134,12 @@ class GameContainer extends Component {
       let sortedRolls = Object.values(rollsObj).sort((a, b) => {
         return b - a;
       });
-      if (sortedRolls[0] === 5) {
+      if (sortedRolls[0] === 6) {
+        this.setState({
+          mulCombo: "Sextuple!!!! x50",
+        });
+        mulRollTotal = mulRollTotal * 50;
+      } else if (sortedRolls[0] === 5) {
         this.setState({
           mulCombo: "Quintuple!!!! x25",
         });
