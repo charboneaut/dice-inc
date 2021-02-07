@@ -14,19 +14,36 @@ class GameContainer extends Component {
         sides: 1,
       },
     ],
+    mulDice: [],
     cash: 0,
     show: false,
     difference: 0,
     tooManySides: false,
     currentRolls: [1],
+    currentMulRolls: [],
     alertTimeout: null,
     combo: null,
+    mulCombo: null,
+    lastMulRoll: null,
     lastRoll: 0,
     dev: false,
   };
+  handleAddMulDice = () => {
+    this.setState({
+      mulDice: [
+        ...this.state.mulDice,
+        {
+          id: v4(),
+          sides: 2,
+        },
+      ],
+    });
+  };
   handleRoll = () => {
     let rollTotal = 0;
+    let mulRollTotal = 0;
     let rolls = [];
+    let mulRolls = [];
     this.state.dice.map(function (die) {
       let roll = Math.floor(Math.random() * (die.sides - 1 + 1)) + 1;
       rollTotal += roll;
@@ -75,6 +92,61 @@ class GameContainer extends Component {
         combo: null,
       });
     }
+    if (this.state.mulDice.length > 0) {
+      this.state.mulDice.map(function (die) {
+        let roll = Math.floor(Math.random() * (die.sides - 1 + 1)) + 1;
+        mulRollTotal += roll;
+        mulRolls.push(roll);
+        return null;
+      });
+      let rollsObj = {};
+      rolls.map(function (roll) {
+        if (rollsObj[roll] === undefined) {
+          rollsObj[roll] = 1;
+        } else {
+          rollsObj[roll]++;
+        }
+        return null;
+      });
+      let sortedRolls = Object.values(rollsObj).sort((a, b) => {
+        return b - a;
+      });
+      if (sortedRolls[0] === 5) {
+        this.setState({
+          mulCombo: "Quintuple!!!! x25",
+        });
+        rollTotal = rollTotal * 25;
+      } else if (sortedRolls[0] >= 3 && sortedRolls[1] >= 2) {
+        this.setState({
+          mulCombo: "Full House!!! x18",
+        });
+        rollTotal = rollTotal * 18;
+      } else if (sortedRolls[0] === 4) {
+        this.setState({
+          mulCombo: "Quadruple!!! x12",
+        });
+        rollTotal = rollTotal * 16;
+      } else if (sortedRolls[0] === 3) {
+        this.setState({
+          mulCombo: "Triple!! x6",
+        });
+        rollTotal = rollTotal * 6;
+      } else if (sortedRolls[0] === 2) {
+        this.setState({
+          mulCombo: "Double! x2",
+        });
+        rollTotal = rollTotal * 2;
+      } else {
+        this.setState({
+          mulCombo: null,
+        });
+      }
+      rollTotal = rollTotal * mulRollTotal;
+      this.setState({
+        lastMulRoll: mulRollTotal,
+        currentMulRolls: mulRolls,
+      });
+    }
     this.setState({
       currentRolls: rolls,
       cash: this.state.cash + rollTotal,
@@ -111,6 +183,39 @@ class GameContainer extends Component {
     });
     this.setState({
       dice: sortedDice,
+      cash: this.state.cash - upgradeCost,
+    });
+  };
+  handleUpgradeMulDice = (upgradedId) => {
+    let newDice = this.state.mulDice.filter(function (die) {
+      return die.id === upgradedId;
+    });
+    let upgradeCost = Math.round((newDice[0].sides * 1.6) ** 3);
+    if (this.state.cash < upgradeCost) {
+      this.setState({
+        show: true,
+        difference: this.state.cash - upgradeCost,
+      });
+      this.handleAutoAlertClose();
+      return;
+    }
+    if (newDice[0].sides >= 6) {
+      this.setState({
+        tooManySides: true,
+      });
+      this.handleAutoAlertClose();
+      return;
+    }
+    let oldDice = this.state.mulDice.filter(function (die) {
+      return die.id !== upgradedId;
+    });
+    newDice[0].sides++;
+    let combinedDice = [...oldDice, newDice[0]];
+    let sortedDice = combinedDice.sort(function (die1, die2) {
+      return die2.sides - die1.sides;
+    });
+    this.setState({
+      mulDice: sortedDice,
       cash: this.state.cash - upgradeCost,
     });
   };
@@ -169,12 +274,16 @@ class GameContainer extends Component {
             handleRoll={this.handleRoll}
             combo={this.state.combo}
             lastRoll={this.state.lastRoll}
+            handleAddMulDice={this.handleAddMulDice}
           />
           <div className="playContainer">
             <DiceContainer
               dice={this.state.dice}
               handleUpgradeDice={this.handleUpgradeDice}
               diceRolls={this.state.currentRolls}
+              mulDice={this.state.mulDice}
+              handleUpgradeMulDice={this.handleUpgradeMulDice}
+              currentMulRolls={this.state.currentMulRolls}
             />
             <NeedsCash difference={this.state.difference} />
           </div>
@@ -191,12 +300,16 @@ class GameContainer extends Component {
             handleRoll={this.handleRoll}
             combo={this.state.combo}
             lastRoll={this.state.lastRoll}
+            handleAddMulDice={this.handleAddMulDice}
           />
           <div className="playContainer">
             <DiceContainer
               dice={this.state.dice}
               handleUpgradeDice={this.handleUpgradeDice}
               diceRolls={this.state.currentRolls}
+              mulDice={this.state.mulDice}
+              handleUpgradeMulDice={this.handleUpgradeMulDice}
+              currentMulRolls={this.state.currentMulRolls}
             />
             <TooManySides difference={this.state.difference} />
           </div>
@@ -213,12 +326,16 @@ class GameContainer extends Component {
             handleRoll={this.handleRoll}
             combo={this.state.combo}
             lastRoll={this.state.lastRoll}
+            handleAddMulDice={this.handleAddMulDice}
           />
           <div className="playContainer">
             <DiceContainer
               dice={this.state.dice}
               handleUpgradeDice={this.handleUpgradeDice}
               diceRolls={this.state.currentRolls}
+              mulDice={this.state.mulDice}
+              handleUpgradeMulDice={this.handleUpgradeMulDice}
+              currentMulRolls={this.state.currentMulRolls}
             />
           </div>
         </div>
@@ -233,12 +350,16 @@ class GameContainer extends Component {
           handleRoll={this.handleRoll}
           combo={this.state.combo}
           lastRoll={this.state.lastRoll}
+          handleAddMulDice={this.handleAddMulDice}
         />
         <div className="playContainer">
           <DiceContainer
             dice={this.state.dice}
             handleUpgradeDice={this.handleUpgradeDice}
             diceRolls={this.state.currentRolls}
+            mulDice={this.state.mulDice}
+            handleUpgradeMulDice={this.handleUpgradeMulDice}
+            currentMulRolls={this.state.currentMulRolls}
           />
         </div>
         <DevHatch onClick={this.handleCheatMode} />

@@ -15,12 +15,12 @@ class GameBar extends Component {
           <Nav className="mr-auto">
             <NavDropdown title="Purchase Dice" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={this.props.handleAddDice}>
-                Purchase a die at ${(this.props.diceAmount * 6) ** 3}
+                Purchase a standard die at ${(this.props.diceAmount * 6) ** 3}
               </NavDropdown.Item>
-              {/* <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item> */}
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={this.props.handleAddMulDice}>
+                Purchase a multiplier die at ${(this.props.diceAmount * 6) ** 3}
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
