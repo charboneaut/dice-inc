@@ -82,9 +82,9 @@ class GameContainer extends Component {
     });
     if (sortedRolls[0] === 6) {
       this.setState({
-        combo: "Sextuple!!!! x50",
+        combo: "Sextuple!!!! x60",
       });
-      rollTotal = rollTotal * 50;
+      rollTotal = rollTotal * 60;
     } else if (sortedRolls[0] === 5) {
       this.setState({
         combo: "Quintuple!!!! x25",
@@ -136,9 +136,9 @@ class GameContainer extends Component {
       });
       if (sortedRolls[0] === 6) {
         this.setState({
-          mulCombo: "Sextuple!!!! x50",
+          mulCombo: "Sextuple!!!! x60",
         });
-        mulRollTotal = mulRollTotal * 50;
+        mulRollTotal = mulRollTotal * 60;
       } else if (sortedRolls[0] === 5) {
         this.setState({
           mulCombo: "Quintuple!!!! x25",
