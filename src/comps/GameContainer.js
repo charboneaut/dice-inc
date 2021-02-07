@@ -29,6 +29,23 @@ class GameContainer extends Component {
     dev: false,
   };
   handleAddMulDice = () => {
+    let mulDiceStart = this.state.mulDice.length + 1;
+    const diceCost = (mulDiceStart * 10) ** 4;
+    if (this.state.cash < diceCost) {
+      this.setState({
+        show: true,
+        difference: this.state.cash - diceCost,
+      });
+      this.handleAutoAlertClose();
+      return;
+    }
+    if (this.state.mulDice.length >= 6) {
+      this.setState({
+        tooManySides: true,
+      });
+      this.handleAutoAlertClose();
+      return;
+    }
     this.setState({
       mulDice: [
         ...this.state.mulDice,
@@ -37,6 +54,7 @@ class GameContainer extends Component {
           sides: 2,
         },
       ],
+      cash: this.state.cash - diceCost,
     });
   };
   handleRoll = () => {
@@ -190,7 +208,7 @@ class GameContainer extends Component {
     let newDice = this.state.mulDice.filter(function (die) {
       return die.id === upgradedId;
     });
-    let upgradeCost = Math.round((newDice[0].sides * 1.6) ** 3);
+    let upgradeCost = Math.round((newDice[0].sides * 10) ** 3);
     if (this.state.cash < upgradeCost) {
       this.setState({
         show: true,
@@ -229,7 +247,7 @@ class GameContainer extends Component {
       this.handleAutoAlertClose();
       return;
     }
-    if (this.state.dice.length >= 12) {
+    if (this.state.dice.length >= 6) {
       this.setState({
         tooManySides: true,
       });
@@ -275,6 +293,7 @@ class GameContainer extends Component {
             combo={this.state.combo}
             lastRoll={this.state.lastRoll}
             handleAddMulDice={this.handleAddMulDice}
+            mulDiceAmount={this.state.mulDice.length}
           />
           <div className="playContainer">
             <DiceContainer
@@ -301,6 +320,7 @@ class GameContainer extends Component {
             combo={this.state.combo}
             lastRoll={this.state.lastRoll}
             handleAddMulDice={this.handleAddMulDice}
+            mulDiceAmount={this.state.mulDice.length}
           />
           <div className="playContainer">
             <DiceContainer
@@ -327,6 +347,7 @@ class GameContainer extends Component {
             combo={this.state.combo}
             lastRoll={this.state.lastRoll}
             handleAddMulDice={this.handleAddMulDice}
+            mulDiceAmount={this.state.mulDice.length}
           />
           <div className="playContainer">
             <DiceContainer
@@ -351,6 +372,7 @@ class GameContainer extends Component {
           combo={this.state.combo}
           lastRoll={this.state.lastRoll}
           handleAddMulDice={this.handleAddMulDice}
+          mulDiceAmount={this.state.mulDice.length}
         />
         <div className="playContainer">
           <DiceContainer

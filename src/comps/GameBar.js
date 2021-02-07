@@ -7,6 +7,7 @@ import { Button } from "react-bootstrap";
 
 class GameBar extends Component {
   render() {
+    let mulDiceStart = this.props.mulDiceAmount + 1;
     return (
       <Navbar variant="dark" expand="lg" id="gameBar">
         <Navbar.Brand>${this.props.cash}</Navbar.Brand>
@@ -19,7 +20,7 @@ class GameBar extends Component {
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={this.props.handleAddMulDice}>
-                Purchase a multiplier die at ${(this.props.diceAmount * 6) ** 3}
+                Purchase a multiplier die at ${(mulDiceStart * 10) ** 4}
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
