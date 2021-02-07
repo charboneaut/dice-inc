@@ -37,11 +37,123 @@ class Die extends Component {
             <div>O O O</div>
           </>
         );
+      case 7:
+        return (
+          <div className="seven">
+            <div>O O O</div>
+            <div>O</div>
+            <div>O O O</div>
+          </div>
+        );
+      case 8:
+        return (
+          <div className="eight">
+            <div>O O O O</div>
+            <div>O O O O</div>
+          </div>
+        );
+      case 9:
+        return (
+          <div className="seven">
+            <div>O O O</div>
+            <div>O O O</div>
+            <div>O O O</div>
+          </div>
+        );
+      case 10:
+        return (
+          <div className="ten">
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+          </div>
+        );
+      case 11:
+        return (
+          <div className="ten">
+            <div>O O O O O O</div>
+            <div>O O O O O</div>
+          </div>
+        );
+      case 12:
+        return (
+          <div className="ten">
+            <div>O O O O O O</div>
+            <div>O O O O O O</div>
+          </div>
+        );
+      case 13:
+        return (
+          <div className="thirteen">
+            <div>O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O</div>
+          </div>
+        );
+      case 14:
+        return (
+          <div className="thirteen">
+            <div>O O O O O</div>
+            <div>O O O O</div>
+            <div>O O O O O</div>
+          </div>
+        );
+      case 15:
+        return (
+          <div className="thirteen">
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+          </div>
+        );
+      case 16:
+        return (
+          <div className="sixteen">
+            <div>O O O O</div>
+            <div>O O O O</div>
+            <div>O O O O</div>
+            <div>O O O O</div>
+          </div>
+        );
+      case 17:
+        return (
+          <div className="sixteen">
+            <div>O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O</div>
+            <div>O O O O</div>
+          </div>
+        );
+      case 18:
+        return (
+          <div className="sixteen">
+            <div>O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O</div>
+          </div>
+        );
+      case 19:
+        return (
+          <div className="sixteen">
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O</div>
+          </div>
+        );
+      case 20:
+        return (
+          <div className="sixteen">
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+            <div>O O O O O</div>
+          </div>
+        );
       default:
         return `d${this.props.sides}`;
     }
   };
-  //TODO LIMIT TO 20 SIDES
   render() {
     return <div className="indvDie">{this.createDie()}</div>;
   }

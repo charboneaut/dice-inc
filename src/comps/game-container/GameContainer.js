@@ -57,6 +57,7 @@ class GameContainer extends Component {
         },
       ],
       cash: this.state.cash - diceCost,
+      currentMulRolls: [...this.state.currentMulRolls, 1],
     });
   };
   handleRoll = () => {
@@ -85,7 +86,7 @@ class GameContainer extends Component {
       this.handleAutoAlertClose();
       return;
     }
-    if (newDice[0].sides >= 6) {
+    if (newDice[0].sides >= 20) {
       this.setState({
         tooManySides: true,
       });
@@ -118,7 +119,7 @@ class GameContainer extends Component {
       this.handleAutoAlertClose();
       return;
     }
-    if (newDice[0].sides >= 6) {
+    if (newDice[0].sides >= 20) {
       this.setState({
         tooManySides: true,
       });

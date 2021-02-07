@@ -21,3 +21,37 @@
   flex-direction: column;
   line-height: 3vh;
 }
+
+.seven {
+  display: flex;
+  flex-direction: column;
+  font-size: 90%;
+  line-height: 100%;
+}
+
+.eight {
+  display: flex;
+  flex-direction: column;
+  font-size: 90%;
+  line-height: 170%;
+}
+
+.ten {
+  display: flex;
+  font-size: 90%;
+  line-height: 100%;
+}
+
+.thirteen {
+  display: flex;
+  flex-direction: column;
+  font-size: 70%;
+  line-height: 150%;
+}
+
+.sixteen {
+  display: flex;
+  flex-direction: column;
+  font-size: 70%;
+  line-height: 100%;
+}
