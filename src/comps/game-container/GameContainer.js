@@ -6,6 +6,7 @@ import { v4 } from "uuid";
 import NeedsCash from "../alerts/NeedsCash";
 import TooManySides from "../alerts/TooManySides";
 import DevHatch from "../dev-hatch/DevHatch";
+import helpRoll from "./helpers/helpRoll";
 class GameContainer extends Component {
   state = {
     dice: [
@@ -59,130 +60,16 @@ class GameContainer extends Component {
     });
   };
   handleRoll = () => {
-    let rollTotal = 0;
-    let mulRollTotal = 0;
-    let rolls = [];
-    let mulRolls = [];
-    this.state.dice.map(function (die) {
-      let roll = Math.floor(Math.random() * (die.sides - 1 + 1)) + 1;
-      rollTotal += roll;
-      rolls.push(roll);
-      return null;
-    });
-    let rollsObj = {};
-    rolls.map(function (roll) {
-      if (rollsObj[roll] === undefined) {
-        rollsObj[roll] = 1;
-      } else {
-        rollsObj[roll]++;
-      }
-      return null;
-    });
+    const rollData = helpRoll(this.state.dice, this.state.mulDice);
     this.setState({
-      lastNaturalRoll: rollTotal,
-    });
-    let sortedRolls = Object.values(rollsObj).sort((a, b) => {
-      return b - a;
-    });
-    if (sortedRolls[0] === 6) {
-      this.setState({
-        combo: "Sextuple!!!! x60",
-      });
-      rollTotal = rollTotal * 60;
-    } else if (sortedRolls[0] === 5) {
-      this.setState({
-        combo: "Quintuple!!!! x25",
-      });
-      rollTotal = rollTotal * 25;
-    } else if (sortedRolls[0] >= 3 && sortedRolls[1] >= 2) {
-      this.setState({
-        combo: "Full House!!! x18",
-      });
-      rollTotal = rollTotal * 18;
-    } else if (sortedRolls[0] === 4) {
-      this.setState({
-        combo: "Quadruple!!! x12",
-      });
-      rollTotal = rollTotal * 16;
-    } else if (sortedRolls[0] === 3) {
-      this.setState({
-        combo: "Triple!! x6",
-      });
-      rollTotal = rollTotal * 6;
-    } else if (sortedRolls[0] === 2) {
-      this.setState({
-        combo: "Double! x2",
-      });
-      rollTotal = rollTotal * 2;
-    } else {
-      this.setState({
-        combo: null,
-      });
-    }
-    if (this.state.mulDice.length > 0) {
-      this.state.mulDice.map(function (die) {
-        let roll = Math.floor(Math.random() * (die.sides - 1 + 1)) + 1;
-        mulRollTotal += roll;
-        mulRolls.push(roll);
-        return null;
-      });
-      //   let rollsMulObj = {};
-      //   mulRolls.map(function (roll) {
-      //     if (rollsMulObj[roll] === undefined) {
-      //       rollsMulObj[roll] = 1;
-      //     } else {
-      //       rollsMulObj[roll]++;
-      //     }
-      //     return null;
-      //   });
-      //   let sortedRolls = Object.values(rollsObj).sort((a, b) => {
-      //     return b - a;
-      //   });
-      //   if (sortedRolls[0] === 6) {
-      //     this.setState({
-      //       mulCombo: "Sextuple!!!! x60",
-      //     });
-      //     mulRollTotal = mulRollTotal * 60;
-      //   } else if (sortedRolls[0] === 5) {
-      //     this.setState({
-      //       mulCombo: "Quintuple!!!! x25",
-      //     });
-      //     mulRollTotal = mulRollTotal * 25;
-      //   } else if (sortedRolls[0] >= 3 && sortedRolls[1] >= 2) {
-      //     this.setState({
-      //       mulCombo: "Full House!!! x18",
-      //     });
-      //     mulRollTotal = mulRollTotal * 18;
-      //   } else if (sortedRolls[0] === 4) {
-      //     this.setState({
-      //       mulCombo: "Quadruple!!! x12",
-      //     });
-      //     mulRollTotal = mulRollTotal * 16;
-      //   } else if (sortedRolls[0] === 3) {
-      //     this.setState({
-      //       mulCombo: "Triple!! x6",
-      //     });
-      //     mulRollTotal = mulRollTotal * 6;
-      //   } else if (sortedRolls[0] === 2) {
-      //     this.setState({
-      //       mulCombo: "Double! x2",
-      //     });
-      //     mulRollTotal = mulRollTotal * 2;
-      //   } else {
-      //     this.setState({
-      //       mulCombo: null,
-      //     });
-      //   }
-      rollTotal = rollTotal * mulRollTotal;
-      this.setState({
-        lastMulRoll: mulRollTotal,
-        currentMulRolls: mulRolls,
-      });
-    }
-    this.setState({
-      currentRolls: rolls,
-      cash: this.state.cash + rollTotal,
-      lastRoll: rollTotal,
+      lastNaturalRoll: rollData.naturalRoll,
+      currentRolls: rollData.rollsArr,
+      cash: this.state.cash + rollData.rollTotal,
+      lastRoll:
+        rollData.rollTotal * rollData.mulRollTotal * rollData.comboData.combo,
+      lastMulRoll: rollData.mulRollTotal,
+      currentMulRolls: rollData.mulRollsArr,
+      combo: rollData.comboData.comboStr,
     });
   };
   handleUpgradeDice = (upgradedId) => {
