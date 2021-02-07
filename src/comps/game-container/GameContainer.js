@@ -1,11 +1,11 @@
 import "./GameContainer.css";
 import { Component } from "react";
-import GameBar from "./GameBar";
-import DiceContainer from "./DiceContainer";
+import GameBar from "../game-bar/GameBar";
+import DiceContainer from "../dice-container/DiceContainer";
 import { v4 } from "uuid";
-import NeedsCash from "./NeedsCash";
-import TooManySides from "./TooManySides";
-import DevHatch from "./DevHatch";
+import NeedsCash from "../alerts/NeedsCash";
+import TooManySides from "../alerts/TooManySides";
+import DevHatch from "../dev-hatch/DevHatch";
 class GameContainer extends Component {
   state = {
     dice: [

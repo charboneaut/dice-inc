@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import { Component } from "react";
 import "./DiceContainer.css";
-import Die from "./Die";
+import Die from "../die/Die";
 
 class DiceContainer extends Component {
   render() {
