@@ -156,6 +156,7 @@ class GameContainer extends Component {
       return;
     }
     this.setState({
+      currentRolls: [...this.state.currentRolls, 1],
       dice: [...this.state.dice, { id: v4(), sides: 1 }],
       cash: this.state.cash - diceCost,
     });
