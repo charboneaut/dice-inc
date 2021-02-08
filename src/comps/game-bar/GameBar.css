@@ -42,3 +42,19 @@
   min-height: 10px;
   font-weight: 700;
 }
+
+.gold {
+  color: gold;
+}
+
+.achievementTab {
+  color: gray;
+  user-select: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 3%;
+}
+
+.achievementTab:hover {
+  color: lightgray;
+}

@@ -28,9 +28,12 @@ class GameBar extends Component {
                 Purchase a multiplier die at ${(mulDiceStart * 10) ** 4}
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link onClick={this.props.achieveMode}>
-              Achievements ({this.props.achieveBonus}%)
-            </Nav.Link>
+            <Nav.Item
+              onClick={this.props.achieveMode}
+              className="achievementTab"
+            >
+              Achievements
+            </Nav.Item>
           </Nav>
         </Navbar.Collapse>
         <Nav.Item className="combo">
@@ -38,7 +41,8 @@ class GameBar extends Component {
         </Nav.Item>
         <Nav.Item className="lastRoll">
           <p>Last Roll: {this.props.lastNaturalRoll}</p>
-          <p>{this.checkIfMul()}</p>
+          <p className="gold">{this.checkIfMul()}</p>
+          <p style={{ color: "lightgray" }}> x {this.props.achieveBonus}%</p>
           <p>, totaling {this.props.lastRoll}</p>
         </Nav.Item>
         <Button id="rollButton" onClick={this.props.roll}>
