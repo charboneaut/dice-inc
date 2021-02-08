@@ -7,6 +7,7 @@ import NeedsCash from "../alerts/NeedsCash";
 import TooManySides from "../alerts/TooManySides";
 import DevHatch from "../dev-hatch/DevHatch";
 import helpRoll from "./helpers/helpRoll";
+import Achievements from "../achievements/Achievements";
 class GameContainer extends Component {
   state = {
     dice: [
@@ -186,9 +187,8 @@ class GameContainer extends Component {
   };
 
   handleAchieveMode = () => {
-    console.log("yas");
     this.setState({
-      achieveMode: !this.state.handleAchieveMode,
+      achieveMode: !this.state.achieveMode,
     });
   };
 
@@ -208,16 +208,21 @@ class GameContainer extends Component {
           lastNaturalRoll={this.state.lastNaturalRoll}
           achieveMode={this.handleAchieveMode}
         />
-        <div className="playContainer">
-          <DiceContainer
-            dice={this.state.dice}
-            upgradeDie={this.handleUpgradeDie}
-            diceRolls={this.state.currentRolls}
-            mulDice={this.state.mulDice}
-            upgradeMulDie={this.handleUpgradeMulDie}
-            currentMulRolls={this.state.currentMulRolls}
-          />
-        </div>
+        {!this.state.achieveMode ? (
+          <div className="playContainer">
+            <DiceContainer
+              dice={this.state.dice}
+              upgradeDie={this.handleUpgradeDie}
+              diceRolls={this.state.currentRolls}
+              mulDice={this.state.mulDice}
+              upgradeMulDie={this.handleUpgradeMulDie}
+              currentMulRolls={this.state.currentMulRolls}
+            />
+          </div>
+        ) : (
+          <Achievements />
+        )}
+
         {this.state.show ? (
           <NeedsCash difference={this.state.difference} />
         ) : null}

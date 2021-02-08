@@ -1,0 +1,6 @@
+.trophyContainer {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid whitesmoke;
+  padding: 3%;
+}
