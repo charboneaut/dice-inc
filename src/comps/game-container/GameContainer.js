@@ -17,7 +17,7 @@ class GameContainer extends Component {
       },
     ],
     mulDice: [],
-    cash: 99,
+    cash: 0,
     show: false,
     difference: 0,
     tooManySides: false,
@@ -40,6 +40,7 @@ class GameContainer extends Component {
         title: "Roll your first die",
         desc: "Just press the button",
         completed: false,
+        achieveNo: 1,
       },
       {
         id: v4(),
@@ -48,6 +49,7 @@ class GameContainer extends Component {
         title: "Make a whole Benjamin",
         desc: "High schoolers are jealous of you",
         completed: false,
+        achieveNo: 2,
       },
     ],
   };
@@ -232,8 +234,14 @@ class GameContainer extends Component {
         return achievement.title !== "Roll your first die";
       });
       targetAchieve[0].completed = true;
+      let sortedAchieves = [targetAchieve[0], ...otherAchieves].sort(function (
+        achieveA,
+        achieveB
+      ) {
+        return achieveA.achieveNo - achieveB.achieveNo;
+      });
       this.setState({
-        achievements: [targetAchieve[0], ...otherAchieves],
+        achievements: sortedAchieves,
         achieveBonus: this.state.achieveBonus + 1,
       });
     }
@@ -249,8 +257,14 @@ class GameContainer extends Component {
         return achievement.title !== "Make a whole Benjamin";
       });
       targetAchieve[0].completed = true;
+      let sortedAchieves = [targetAchieve[0], ...otherAchieves].sort(function (
+        achieveA,
+        achieveB
+      ) {
+        return achieveA.achieveNo - achieveB.achieveNo;
+      });
       this.setState({
-        achievements: [targetAchieve[0], ...otherAchieves],
+        achievements: sortedAchieves,
         achieveBonus: this.state.achieveBonus + 4,
       });
     }
