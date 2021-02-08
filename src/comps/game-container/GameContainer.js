@@ -236,7 +236,10 @@ class GameContainer extends Component {
   };
 
   checkIfAchievementsComplete = () => {
-    const achievementsData = detectAchievements(this.state.achievements);
+    const achievementsData = detectAchievements(
+      this.state.achievements,
+      this.state.cash
+    );
     if (achievementsData.wasSomethingCompleted) {
       this.setState({
         achieveAlert: true,
