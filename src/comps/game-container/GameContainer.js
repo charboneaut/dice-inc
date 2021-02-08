@@ -29,6 +29,7 @@ class GameContainer extends Component {
     lastRoll: 0,
     lastNaturalRoll: 0,
     dev: false,
+    achieveMode: false,
   };
   handleAddMulDie = () => {
     let mulDiceStart = this.state.mulDice.length + 1;
@@ -184,6 +185,13 @@ class GameContainer extends Component {
     });
   };
 
+  handleAchieveMode = () => {
+    console.log("yas");
+    this.setState({
+      achieveMode: !this.state.handleAchieveMode,
+    });
+  };
+
   render() {
     return (
       <div className="gameContainer">
@@ -198,6 +206,7 @@ class GameContainer extends Component {
           mulDiceAmount={this.state.mulDice.length}
           lastMulRoll={this.state.lastMulRoll}
           lastNaturalRoll={this.state.lastNaturalRoll}
+          achieveMode={this.handleAchieveMode}
         />
         <div className="playContainer">
           <DiceContainer
