@@ -4,8 +4,9 @@ import "./AchieveAlert.css";
 class AchieveAlert extends Component {
   render() {
     return (
-      <Alert id="achieveAlert" variant="light">
-        u did it
+      <Alert id="achieveAlert" variant="dark">
+        Achievement Unlocked: {this.props.achievement.title}, +
+        {this.props.achievement.bonus}%
       </Alert>
     );
   }

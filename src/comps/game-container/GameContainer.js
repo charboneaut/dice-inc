@@ -34,6 +34,7 @@ class GameContainer extends Component {
     achieveMode: false,
     achieveBonus: 100,
     achieveAlert: false,
+    lastAchievement: null,
     achievements: [
       {
         id: v4(),
@@ -245,6 +246,7 @@ class GameContainer extends Component {
       });
       this.setState({
         achieveAlert: true,
+        lastAchievement: targetAchieve[0],
         achievements: sortedAchieves,
         achieveBonus: this.state.achieveBonus + 1,
       });
@@ -268,6 +270,8 @@ class GameContainer extends Component {
         return achieveA.achieveNo - achieveB.achieveNo;
       });
       this.setState({
+        achieveAlert: true,
+        lastAchievement: targetAchieve[0],
         achievements: sortedAchieves,
         achieveBonus: this.state.achieveBonus + 4,
       });
@@ -313,7 +317,9 @@ class GameContainer extends Component {
           <TooManySides difference={this.state.difference} />
         ) : null}
         {!this.state.dev ? <DevHatch onClick={this.handleDevMode} /> : null}
-        {this.state.achieveAlert ? <AchieveAlert /> : null}
+        {this.state.achieveAlert ? (
+          <AchieveAlert achievement={this.state.lastAchievement} />
+        ) : null}
       </div>
     );
   }
