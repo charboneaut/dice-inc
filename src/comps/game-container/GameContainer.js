@@ -31,6 +31,25 @@ class GameContainer extends Component {
     lastNaturalRoll: 0,
     dev: false,
     achieveMode: false,
+    achieveBonus: 100,
+    achievements: [
+      {
+        id: v4(),
+        difficulty: "Very Easy",
+        bonus: 1,
+        title: "Roll your first die",
+        desc: "Just press the button",
+        completed: false,
+      },
+      {
+        id: v4(),
+        difficulty: "Easy",
+        bonus: 4,
+        title: "Make a whole Benjamin",
+        desc: "High schoolers are jealous of you",
+        completed: false,
+      },
+    ],
   };
   handleAddMulDie = () => {
     let mulDiceStart = this.state.mulDice.length + 1;
@@ -67,13 +86,21 @@ class GameContainer extends Component {
     this.setState({
       lastNaturalRoll: rollData.naturalRoll,
       currentRolls: rollData.rollsArr,
-      cash: this.state.cash + rollData.rollTotal,
-      lastRoll:
-        rollData.rollTotal * rollData.mulRollTotal * rollData.comboData.combo,
+      cash:
+        this.state.cash +
+        Math.round((rollData.rollTotal * this.state.achieveBonus) / 100),
+      lastRoll: Math.round(
+        (rollData.rollTotal *
+          rollData.mulRollTotal *
+          rollData.comboData.combo *
+          this.state.achieveBonus) /
+          100
+      ),
       lastMulRoll: rollData.mulRollTotal,
       currentMulRolls: rollData.mulRollsArr,
       combo: rollData.comboData.comboStr,
     });
+    this.checkIfAchievementsComplete();
   };
   handleUpgradeDie = (upgradedId) => {
     let newDice = this.state.dice.filter(function (die) {
@@ -192,6 +219,25 @@ class GameContainer extends Component {
     });
   };
 
+  checkIfAchievementsComplete = () => {
+    if (!this.state.achievements[0].completed) {
+      let targetAchieve = this.state.achievements.filter(function (
+        achievement
+      ) {
+        return achievement.title === "Roll your first die";
+      });
+      let otherAchieves = this.state.achievements.filter(function (
+        achievement
+      ) {
+        return achievement.title !== "Roll your first die";
+      });
+      targetAchieve[0].completed = true;
+      this.setState({
+        achievements: [targetAchieve[0], ...otherAchieves],
+      });
+    }
+  };
+
   render() {
     return (
       <div className="gameContainer">
@@ -207,6 +253,7 @@ class GameContainer extends Component {
           lastMulRoll={this.state.lastMulRoll}
           lastNaturalRoll={this.state.lastNaturalRoll}
           achieveMode={this.handleAchieveMode}
+          achieveBonus={this.state.achieveBonus}
         />
         {!this.state.achieveMode ? (
           <div className="playContainer">
@@ -220,9 +267,8 @@ class GameContainer extends Component {
             />
           </div>
         ) : (
-          <Achievements />
+          <Achievements achievements={this.state.achievements} />
         )}
-
         {this.state.show ? (
           <NeedsCash difference={this.state.difference} />
         ) : null}

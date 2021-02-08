@@ -1,14 +1,30 @@
 import { Component } from "react";
+import { Col } from "react-bootstrap";
 import Trophy from "../trophy/Trophy";
 import "./Achievements.css";
 
 class Achievements extends Component {
   render() {
     return (
-      <div className="headerContainer">
-        <h1>Achievements</h1>
-        <Trophy />
-      </div>
+      <>
+        <div className="headerContainer">
+          <h1>Achievements</h1>
+          <Col>
+            {this.props.achievements.map((achievement) => {
+              return (
+                <Trophy
+                  key={achievement.id}
+                  trophyName={achievement.title}
+                  trophyDesc={achievement.desc}
+                  completed={achievement.completed}
+                  trophyDifficulty={achievement.difficulty}
+                  bonus={achievement.bonus}
+                />
+              );
+            })}
+          </Col>
+        </div>
+      </>
     );
   }
 }

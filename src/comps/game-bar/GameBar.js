@@ -28,7 +28,9 @@ class GameBar extends Component {
                 Purchase a multiplier die at ${(mulDiceStart * 10) ** 4}
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link onClick={this.props.achieveMode}>Achievements</Nav.Link>
+            <Nav.Link onClick={this.props.achieveMode}>
+              Achievements ({this.props.achieveBonus}%)
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Nav.Item className="combo">

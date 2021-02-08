@@ -1,15 +1,31 @@
 import { Component } from "react";
+import { Card } from "react-bootstrap";
 import "./Trophy.css";
 
 class Trophy extends Component {
   render() {
     return (
-      <div className="trophyContainer">
-        <h5>Achievement Title</h5>
-        <p>Achievement Desc</p>
-        <p>Achievement Difficulty</p>
-        <p>COMPLETED</p>
-      </div>
+      <Card
+        className="trophyContainer"
+        style={{ width: "18rem", margin: "1%", height: "18rem" }}
+        bg="dark"
+      >
+        <Card.Header style={{ width: "18rem", fontWeight: "700" }}>
+          {this.props.trophyName}
+        </Card.Header>
+        <Card.Body>
+          <Card.Text className="desc">{this.props.trophyDesc}</Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Card.Text>{this.props.bonus}% Bonus</Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Card.Text>{this.props.trophyDifficulty}</Card.Text>
+        </Card.Body>
+        <Card.Footer style={{ width: "18rem", fontWeight: "700" }}>
+          {this.props.completed ? "Completed" : "Incomplete"}
+        </Card.Footer>
+      </Card>
     );
   }
 }
