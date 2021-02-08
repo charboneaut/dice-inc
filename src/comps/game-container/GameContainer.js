@@ -9,6 +9,7 @@ import DevHatch from "../dev-hatch/DevHatch";
 import helpRoll from "./helpers/helpRoll";
 import Achievements from "../achievements/Achievements";
 import AchieveAlert from "../alerts/AchieveAlert";
+import detectAchievements from "./helpers/detectAchievements";
 class GameContainer extends Component {
   state = {
     dice: [
@@ -47,12 +48,21 @@ class GameContainer extends Component {
       },
       {
         id: v4(),
-        difficulty: "Easy",
-        bonus: 4,
+        difficulty: "Very Easy",
+        bonus: 1,
         title: "Make a whole Benjamin",
         desc: "High schoolers are jealous of you",
         completed: false,
         achieveNo: 2,
+      },
+      {
+        id: v4(),
+        difficulty: "Easy",
+        bonus: 3,
+        title: "Make $1000",
+        desc: "Still less than the stimulus check",
+        completed: false,
+        achieveNo: 3,
       },
     ],
   };
@@ -226,57 +236,17 @@ class GameContainer extends Component {
   };
 
   checkIfAchievementsComplete = () => {
-    if (!this.state.achievements[0].completed) {
-      let targetAchieve = this.state.achievements.filter(function (
-        achievement
-      ) {
-        return achievement.title === "Roll your first die";
-      });
-      let otherAchieves = this.state.achievements.filter(function (
-        achievement
-      ) {
-        return achievement.title !== "Roll your first die";
-      });
-      targetAchieve[0].completed = true;
-      let sortedAchieves = [targetAchieve[0], ...otherAchieves].sort(function (
-        achieveA,
-        achieveB
-      ) {
-        return achieveA.achieveNo - achieveB.achieveNo;
-      });
+    const achievementsData = detectAchievements(this.state.achievements);
+    if (achievementsData.wasSomethingCompleted) {
       this.setState({
         achieveAlert: true,
-        lastAchievement: targetAchieve[0],
-        achievements: sortedAchieves,
-        achieveBonus: this.state.achieveBonus + 1,
+        lastAchievement: achievementsData.completedAchieve,
+        achievements: achievementsData.sortedAchievements,
+        achieveBonus:
+          this.state.achieveBonus + achievementsData.completedAchieve.bonus,
       });
+      this.handleAutoAlertClose();
     }
-    if (!this.state.achievements[1].completed && this.state.cash >= 100) {
-      let targetAchieve = this.state.achievements.filter(function (
-        achievement
-      ) {
-        return achievement.title === "Make a whole Benjamin";
-      });
-      let otherAchieves = this.state.achievements.filter(function (
-        achievement
-      ) {
-        return achievement.title !== "Make a whole Benjamin";
-      });
-      targetAchieve[0].completed = true;
-      let sortedAchieves = [targetAchieve[0], ...otherAchieves].sort(function (
-        achieveA,
-        achieveB
-      ) {
-        return achieveA.achieveNo - achieveB.achieveNo;
-      });
-      this.setState({
-        achieveAlert: true,
-        lastAchievement: targetAchieve[0],
-        achievements: sortedAchieves,
-        achieveBonus: this.state.achieveBonus + 4,
-      });
-    }
-    this.handleAutoAlertClose();
   };
 
   render() {

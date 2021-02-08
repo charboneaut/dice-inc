@@ -31,3 +31,10 @@ export function calculateCombo(rollArr) {
   }
   return { comboStr, combo };
 }
+
+export function sortAchievements(achievements) {
+  let sortedAchieves = achievements.sort(function (achieveA, achieveB) {
+    return achieveA.achieveNo - achieveB.achieveNo;
+  });
+  return sortedAchieves;
+}
