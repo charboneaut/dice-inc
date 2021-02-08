@@ -23,10 +23,13 @@ class Achievements extends Component {
               );
             })}
           </Col>
-          <p className="note">
-            Achievement bonuses are calculated last and rounded, a roll of 1
-            with a 149% bonus is still 1
-          </p>
+          <div className="note">
+            <p>Achievements are only checked for completion upon roll</p>
+            <p>
+              Achievement bonuses are calculated last and rounded, a roll of 1
+              with a 149% bonus is still 1
+            </p>
+          </div>
         </div>
       </>
     );

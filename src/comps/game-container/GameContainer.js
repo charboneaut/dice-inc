@@ -50,10 +50,19 @@ class GameContainer extends Component {
         id: v4(),
         difficulty: "Very Easy",
         bonus: 1,
+        title: "Upgrade your first die",
+        desc: "I wonder what this button does",
+        completed: false,
+        achieveNo: 2,
+      },
+      {
+        id: v4(),
+        difficulty: "Very Easy",
+        bonus: 1,
         title: "Make a whole Benjamin",
         desc: "High schoolers are jealous of you",
         completed: false,
-        achieveNo: 2,
+        achieveNo: 3,
       },
       {
         id: v4(),
@@ -62,7 +71,7 @@ class GameContainer extends Component {
         title: "Make $1000",
         desc: "Still less than the stimulus check",
         completed: false,
-        achieveNo: 3,
+        achieveNo: 4,
       },
     ],
   };
@@ -238,7 +247,8 @@ class GameContainer extends Component {
   checkIfAchievementsComplete = () => {
     const achievementsData = detectAchievements(
       this.state.achievements,
-      this.state.cash
+      this.state.cash,
+      this.state.dice
     );
     if (achievementsData.wasSomethingCompleted) {
       this.setState({
