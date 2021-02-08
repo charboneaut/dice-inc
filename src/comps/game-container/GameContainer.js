@@ -17,7 +17,7 @@ class GameContainer extends Component {
       },
     ],
     mulDice: [],
-    cash: 0,
+    cash: 99,
     show: false,
     difference: 0,
     tooManySides: false,
@@ -234,6 +234,24 @@ class GameContainer extends Component {
       targetAchieve[0].completed = true;
       this.setState({
         achievements: [targetAchieve[0], ...otherAchieves],
+        achieveBonus: this.state.achieveBonus + 1,
+      });
+    }
+    if (!this.state.achievements[1].completed && this.state.cash >= 100) {
+      let targetAchieve = this.state.achievements.filter(function (
+        achievement
+      ) {
+        return achievement.title === "Make a whole Benjamin";
+      });
+      let otherAchieves = this.state.achievements.filter(function (
+        achievement
+      ) {
+        return achievement.title !== "Make a whole Benjamin";
+      });
+      targetAchieve[0].completed = true;
+      this.setState({
+        achievements: [targetAchieve[0], ...otherAchieves],
+        achieveBonus: this.state.achieveBonus + 4,
       });
     }
   };
