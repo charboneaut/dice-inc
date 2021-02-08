@@ -8,6 +8,7 @@ import TooManySides from "../alerts/TooManySides";
 import DevHatch from "../dev-hatch/DevHatch";
 import helpRoll from "./helpers/helpRoll";
 import Achievements from "../achievements/Achievements";
+import AchieveAlert from "../alerts/AchieveAlert";
 class GameContainer extends Component {
   state = {
     dice: [
@@ -32,6 +33,7 @@ class GameContainer extends Component {
     dev: false,
     achieveMode: false,
     achieveBonus: 100,
+    achieveAlert: false,
     achievements: [
       {
         id: v4(),
@@ -202,6 +204,7 @@ class GameContainer extends Component {
         this.setState({
           show: false,
           tooManySides: false,
+          achieveAlert: false,
           alertTimeout: null,
         });
       }, 2900),
@@ -241,6 +244,7 @@ class GameContainer extends Component {
         return achieveA.achieveNo - achieveB.achieveNo;
       });
       this.setState({
+        achieveAlert: true,
         achievements: sortedAchieves,
         achieveBonus: this.state.achieveBonus + 1,
       });
@@ -268,6 +272,7 @@ class GameContainer extends Component {
         achieveBonus: this.state.achieveBonus + 4,
       });
     }
+    this.handleAutoAlertClose();
   };
 
   render() {
@@ -308,6 +313,7 @@ class GameContainer extends Component {
           <TooManySides difference={this.state.difference} />
         ) : null}
         {!this.state.dev ? <DevHatch onClick={this.handleDevMode} /> : null}
+        {this.state.achieveAlert ? <AchieveAlert /> : null}
       </div>
     );
   }

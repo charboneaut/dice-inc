@@ -16,12 +16,8 @@ class Trophy extends Component {
         <Card.Body>
           <Card.Text className="desc">{this.props.trophyDesc}</Card.Text>
         </Card.Body>
-        <Card.Body>
-          <Card.Text>{this.props.bonus}% Bonus</Card.Text>
-        </Card.Body>
-        <Card.Body>
-          <Card.Text>{this.props.trophyDifficulty}</Card.Text>
-        </Card.Body>
+        <Card.Text>{this.props.bonus}% Bonus</Card.Text>
+        <Card.Text>{this.props.trophyDifficulty}</Card.Text>
         <Card.Footer style={{ width: "18rem", fontWeight: "700" }}>
           {this.props.completed ? "Completed" : "Incomplete"}
         </Card.Footer>
