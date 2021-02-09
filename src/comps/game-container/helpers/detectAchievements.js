@@ -155,5 +155,41 @@ export default function detectAchievements(
       wasSomethingCompleted,
     };
   }
+  if (!achievements[16].completed && dice[0].sides === 20) {
+    achievements[16].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[16],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[17].completed && cash >= 10000000) {
+    achievements[17].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[17],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[18].completed && dice.length + mulDice.length === 12) {
+    achievements[18].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[18],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[19].completed && combo.startsWith("Quintuple")) {
+    achievements[19].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[19],
+      wasSomethingCompleted,
+    };
+  }
   return { wasSomethingCompleted };
 }

@@ -182,6 +182,42 @@ class GameContainer extends Component {
         completed: false,
         achieveNo: 16,
       },
+      {
+        id: v4(),
+        difficulty: "Very Hard",
+        bonus: 10,
+        title: "Upgrade a die to a d20",
+        desc: "Roll the basics",
+        completed: false,
+        achieveNo: 17,
+      },
+      {
+        id: v4(),
+        difficulty: "Very Hard",
+        bonus: 10,
+        title: "Posess $10000000",
+        desc: "High Roller",
+        completed: false,
+        achieveNo: 18,
+      },
+      {
+        id: v4(),
+        difficulty: "Very Hard",
+        bonus: 10,
+        title: "Have 9 dice total",
+        desc: "Fill the board",
+        completed: false,
+        achieveNo: 19,
+      },
+      {
+        id: v4(),
+        difficulty: "Very Hard",
+        bonus: 10,
+        title: "Roll your first quintuple",
+        desc: "Hit the road, jackpot",
+        completed: false,
+        achieveNo: 20,
+      },
     ],
   };
   handleAddMulDie = () => {
@@ -376,7 +412,7 @@ class GameContainer extends Component {
   };
 
   expandAchievePage = () => {
-    const style = { height: 200 + "vh", width: 99 + "vw" };
+    const style = { height: 400 + "vh", width: 99 + "vw" };
     if (this.state.achieveMode) {
       return style;
     } else {
