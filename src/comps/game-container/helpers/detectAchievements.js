@@ -119,5 +119,41 @@ export default function detectAchievements(
       wasSomethingCompleted,
     };
   }
+  if (!achievements[12].completed && combo.startsWith("Quadruple")) {
+    achievements[12].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[12],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[13].completed && dice[0].sides >= 12) {
+    achievements[13].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[13],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[14].completed && dice.length + mulDice.length >= 6) {
+    achievements[14].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[14],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[15].completed && cash >= 100000) {
+    achievements[15].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[15],
+      wasSomethingCompleted,
+    };
+  }
   return { wasSomethingCompleted };
 }
