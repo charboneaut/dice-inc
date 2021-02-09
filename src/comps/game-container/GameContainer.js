@@ -218,6 +218,33 @@ class GameContainer extends Component {
         completed: false,
         achieveNo: 20,
       },
+      {
+        id: v4(),
+        difficulty: "Ultra Hard",
+        bonus: 25,
+        title: "Limit Breaker",
+        desc: "Possess the maximum safe integer in Javascript, in cash",
+        completed: false,
+        achieveNo: 21,
+      },
+      {
+        id: v4(),
+        difficulty: "Ultra Hard",
+        bonus: 25,
+        title: "Possession is 9/10 of the law",
+        desc: "Buy everything",
+        completed: false,
+        achieveNo: 22,
+      },
+      {
+        id: v4(),
+        difficulty: "Ultra Hard",
+        bonus: 25,
+        title: "Roll your first sextuple",
+        desc: "It's not as dirty as it sounds",
+        completed: false,
+        achieveNo: 23,
+      },
     ],
   };
   handleAddMulDie = () => {

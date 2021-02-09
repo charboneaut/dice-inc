@@ -173,7 +173,7 @@ export default function detectAchievements(
       wasSomethingCompleted,
     };
   }
-  if (!achievements[18].completed && dice.length + mulDice.length === 12) {
+  if (!achievements[18].completed && dice.length + mulDice.length >= 9) {
     achievements[18].completed = true;
     wasSomethingCompleted = true;
     return {
@@ -188,6 +188,38 @@ export default function detectAchievements(
     return {
       sortedAchievements,
       completedAchieve: sortedAchievements[19],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[20].completed && cash >= Number.MAX_SAFE_INTEGER) {
+    achievements[20].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[20],
+      wasSomethingCompleted,
+    };
+  }
+  if (
+    !achievements[21].completed &&
+    dice.length + mulDice.length >= 12 &&
+    dice[5].sides === 20 &&
+    mulDice[5].sides === 20
+  ) {
+    achievements[21].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[21],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[22].completed && combo.startsWith("Sextuple")) {
+    achievements[22].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[22],
       wasSomethingCompleted,
     };
   }
