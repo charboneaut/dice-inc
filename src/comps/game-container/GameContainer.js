@@ -92,6 +92,33 @@ class GameContainer extends Component {
         completed: false,
         achieveNo: 6,
       },
+      {
+        id: v4(),
+        difficulty: "Easy",
+        bonus: 3,
+        title: "Upgrade a die to a d6",
+        desc: "The classic",
+        completed: false,
+        achieveNo: 7,
+      },
+      {
+        id: v4(),
+        difficulty: "Easy",
+        bonus: 3,
+        title: "Roll your first double",
+        desc: "Snake eyes?",
+        completed: false,
+        achieveNo: 8,
+      },
+      {
+        id: v4(),
+        difficulty: "Medium",
+        bonus: 5,
+        title: "Make $10000",
+        desc: "Almost minimum wage",
+        completed: false,
+        achieveNo: 9,
+      },
     ],
   };
   handleAddMulDie = () => {
@@ -269,7 +296,8 @@ class GameContainer extends Component {
       this.state.achievements,
       this.state.cash,
       this.state.dice,
-      this.state.rollCount
+      this.state.rollCount,
+      this.state.combo
     );
     if (achievementsData.wasSomethingCompleted) {
       this.setState({

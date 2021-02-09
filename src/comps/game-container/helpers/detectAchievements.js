@@ -4,7 +4,8 @@ export default function detectAchievements(
   achievements,
   cash,
   dice,
-  rollCount
+  rollCount,
+  combo
 ) {
   let wasSomethingCompleted = false;
   const sortedAchievements = sortAchievements(achievements);
@@ -59,6 +60,33 @@ export default function detectAchievements(
     return {
       sortedAchievements,
       completedAchieve: sortedAchievements[5],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[6].completed && dice[0].sides >= 6) {
+    achievements[6].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[6],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[7].completed && combo.startsWith("Double")) {
+    achievements[7].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[7],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[8].completed && cash >= 10000) {
+    achievements[8].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[8],
       wasSomethingCompleted,
     };
   }
