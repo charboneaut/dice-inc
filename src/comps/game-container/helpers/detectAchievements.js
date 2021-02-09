@@ -1,6 +1,11 @@
 import { sortAchievements } from "./utils";
 
-export default function detectAchievements(achievements, cash, dice) {
+export default function detectAchievements(
+  achievements,
+  cash,
+  dice,
+  rollCount
+) {
   let wasSomethingCompleted = false;
   const sortedAchievements = sortAchievements(achievements);
   if (!achievements[0].completed) {
@@ -36,6 +41,24 @@ export default function detectAchievements(achievements, cash, dice) {
     return {
       sortedAchievements,
       completedAchieve: sortedAchievements[3],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[4].completed && dice.length > 1) {
+    achievements[4].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[4],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[5].completed && rollCount >= 99) {
+    achievements[5].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[5],
       wasSomethingCompleted,
     };
   }

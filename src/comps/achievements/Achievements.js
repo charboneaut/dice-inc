@@ -9,7 +9,7 @@ class Achievements extends Component {
       <>
         <div className="headerContainer">
           <h1>Achievements</h1>
-          <Col>
+          <Col className="achievementContainer">
             {this.props.achievements.map((achievement) => {
               return (
                 <Trophy

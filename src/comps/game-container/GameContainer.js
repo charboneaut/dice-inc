@@ -36,6 +36,7 @@ class GameContainer extends Component {
     achieveBonus: 100,
     achieveAlert: false,
     lastAchievement: null,
+    rollCount: 0,
     achievements: [
       {
         id: v4(),
@@ -72,6 +73,24 @@ class GameContainer extends Component {
         desc: "Still less than the stimulus check",
         completed: false,
         achieveNo: 4,
+      },
+      {
+        id: v4(),
+        difficulty: "Easy",
+        bonus: 3,
+        title: "Add your first dice",
+        desc: "Double down",
+        completed: false,
+        achieveNo: 5,
+      },
+      {
+        id: v4(),
+        difficulty: "Easy",
+        bonus: 3,
+        title: "Roll 100x",
+        desc: "Just press the button 100 times",
+        completed: false,
+        achieveNo: 6,
       },
     ],
   };
@@ -123,6 +142,7 @@ class GameContainer extends Component {
       lastMulRoll: rollData.mulRollTotal,
       currentMulRolls: rollData.mulRollsArr,
       combo: rollData.comboData.comboStr,
+      rollCount: this.state.rollCount + 1,
     });
     this.checkIfAchievementsComplete();
   };
@@ -248,7 +268,8 @@ class GameContainer extends Component {
     const achievementsData = detectAchievements(
       this.state.achievements,
       this.state.cash,
-      this.state.dice
+      this.state.dice,
+      this.state.rollCount
     );
     if (achievementsData.wasSomethingCompleted) {
       this.setState({

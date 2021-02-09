@@ -3,6 +3,11 @@
   flex-direction: column;
 }
 
+.achievementContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 h1 {
   font-style: italic;
   margin-top: 1%;
