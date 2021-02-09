@@ -311,9 +311,18 @@ class GameContainer extends Component {
     }
   };
 
+  expandAchievePage = () => {
+    const style = { height: 200 + "vh", width: 99 + "vw" };
+    if (this.state.achieveMode) {
+      return style;
+    } else {
+      return { height: 100 + "vh" };
+    }
+  };
+
   render() {
     return (
-      <div className="gameContainer">
+      <div className="gameContainer" style={this.expandAchievePage()}>
         <GameBar
           cash={this.state.cash}
           addDie={this.handleAddDie}
