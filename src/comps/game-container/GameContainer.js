@@ -67,10 +67,10 @@ class GameContainer extends Component {
       },
       {
         id: v4(),
-        difficulty: "Easy",
-        bonus: 3,
-        title: "Make $1000",
-        desc: "Still less than the stimulus check",
+        difficulty: "Very Easy",
+        bonus: 1,
+        title: "Add your first dice",
+        desc: "Double down",
         completed: false,
         achieveNo: 4,
       },
@@ -78,8 +78,8 @@ class GameContainer extends Component {
         id: v4(),
         difficulty: "Easy",
         bonus: 3,
-        title: "Add your first dice",
-        desc: "Double down",
+        title: "Make $1000",
+        desc: "Still less than the stimulus check",
         completed: false,
         achieveNo: 5,
       },
@@ -118,6 +118,33 @@ class GameContainer extends Component {
         desc: "Almost minimum wage",
         completed: false,
         achieveNo: 9,
+      },
+      {
+        id: v4(),
+        difficulty: "Medium",
+        bonus: 5,
+        title: "Roll 1000x",
+        desc: "Just press the button 1000 times",
+        completed: false,
+        achieveNo: 10,
+      },
+      {
+        id: v4(),
+        difficulty: "Medium",
+        bonus: 5,
+        title: "Roll your first triple",
+        desc: "OH BABY A TRIPLE",
+        completed: false,
+        achieveNo: 11,
+      },
+      {
+        id: v4(),
+        difficulty: "Medium",
+        bonus: 5,
+        title: "Add your first multiplier die",
+        desc: "It's a slippery slope from here",
+        completed: false,
+        achieveNo: 12,
       },
     ],
   };
@@ -297,7 +324,8 @@ class GameContainer extends Component {
       this.state.cash,
       this.state.dice,
       this.state.rollCount,
-      this.state.combo
+      this.state.combo,
+      this.state.mulDice
     );
     if (achievementsData.wasSomethingCompleted) {
       this.setState({

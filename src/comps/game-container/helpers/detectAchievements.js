@@ -5,9 +5,11 @@ export default function detectAchievements(
   cash,
   dice,
   rollCount,
-  combo
+  combo,
+  mulDice
 ) {
   let wasSomethingCompleted = false;
+  combo = combo === null ? "single" : combo;
   const sortedAchievements = sortAchievements(achievements);
   if (!achievements[0].completed) {
     achievements[0].completed = true;
@@ -36,7 +38,7 @@ export default function detectAchievements(
       wasSomethingCompleted,
     };
   }
-  if (!achievements[3].completed && cash >= 1000) {
+  if (!achievements[3].completed && dice.length > 1) {
     achievements[3].completed = true;
     wasSomethingCompleted = true;
     return {
@@ -45,7 +47,7 @@ export default function detectAchievements(
       wasSomethingCompleted,
     };
   }
-  if (!achievements[4].completed && dice.length > 1) {
+  if (!achievements[4].completed && cash >= 1000) {
     achievements[4].completed = true;
     wasSomethingCompleted = true;
     return {
@@ -87,6 +89,33 @@ export default function detectAchievements(
     return {
       sortedAchievements,
       completedAchieve: sortedAchievements[8],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[9].completed && rollCount >= 999) {
+    achievements[9].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[9],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[10].completed && combo.startsWith("Triple")) {
+    achievements[10].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[10],
+      wasSomethingCompleted,
+    };
+  }
+  if (!achievements[11].completed && mulDice.length > 0) {
+    achievements[11].completed = true;
+    wasSomethingCompleted = true;
+    return {
+      sortedAchievements,
+      completedAchieve: sortedAchievements[11],
       wasSomethingCompleted,
     };
   }
