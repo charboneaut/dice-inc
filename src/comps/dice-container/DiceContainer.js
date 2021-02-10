@@ -18,7 +18,7 @@ class DiceContainer extends Component {
                 currentside={this.props.diceRolls[indexD]}
               />
               <p>D{die.sides}</p>
-              <p>Upgrade at ${Math.round((die.sides * 1.6) ** 3)}</p>
+              <p>Upgrade at ${Math.round((die.sides * 3) ** 2)}</p>
               <Button
                 onClick={() => this.props.upgradeDie(die.id)}
                 id="upgradeButton"
@@ -37,7 +37,7 @@ class DiceContainer extends Component {
                 currentside={this.props.currentMulRolls[indexM]}
               />
               <p>D{mulDie.sides}</p>
-              <p>Upgrade at ${Math.round((mulDie.sides * 10) ** 3)}</p>
+              <p>Upgrade at ${Math.round((mulDie.sides * 20) ** 2)}</p>
               <Button
                 onClick={() => this.props.upgradeMulDie(mulDie.id)}
                 id="upgradeButton"

@@ -303,7 +303,7 @@ class GameContainer extends Component {
     let newDice = this.state.dice.filter(function (die) {
       return die.id === upgradedId;
     });
-    let upgradeCost = Math.round((newDice[0].sides * 1.6) ** 3);
+    let upgradeCost = Math.round((newDice[0].sides * 3) ** 3);
     if (this.state.cash < upgradeCost) {
       this.setState({
         show: true,
@@ -336,7 +336,7 @@ class GameContainer extends Component {
     let newDice = this.state.mulDice.filter(function (die) {
       return die.id === upgradedId;
     });
-    let upgradeCost = Math.round((newDice[0].sides * 10) ** 3);
+    let upgradeCost = Math.round((newDice[0].sides * 20) ** 2);
     if (this.state.cash < upgradeCost) {
       this.setState({
         show: true,
@@ -366,7 +366,7 @@ class GameContainer extends Component {
     });
   };
   handleAddDie = () => {
-    const diceCost = (this.state.dice.length * 6) ** 3;
+    const diceCost = (this.state.dice.length * 15) ** 2;
     if (this.state.cash < diceCost) {
       this.setState({
         show: true,
