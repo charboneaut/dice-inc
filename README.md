@@ -1,1 +1,1 @@
-deployment: dice-inc.vercel.app
+deployment: https://dice-inc.vercel.app
