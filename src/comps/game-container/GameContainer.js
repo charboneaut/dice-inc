@@ -37,6 +37,8 @@ class GameContainer extends Component {
     achieveAlert: false,
     lastAchievement: null,
     rollCount: 0,
+    saveMode: false,
+    saveText: null,
     achievements: [
       {
         id: v4(),
@@ -303,7 +305,7 @@ class GameContainer extends Component {
     let newDice = this.state.dice.filter(function (die) {
       return die.id === upgradedId;
     });
-    let upgradeCost = Math.round((newDice[0].sides * 3) ** 3);
+    let upgradeCost = Math.round((newDice[0].sides * 3) ** 2);
     if (this.state.cash < upgradeCost) {
       this.setState({
         show: true,
@@ -439,12 +441,19 @@ class GameContainer extends Component {
   };
 
   expandAchievePage = () => {
-    const style = { height: 400 + "vh", width: 99 + "vw" };
+    const style = { height: 350 + "vh", width: 99 + "vw" };
     if (this.state.achieveMode) {
       return style;
     } else {
       return { height: 100 + "vh" };
     }
+  };
+
+  handleSaveMode = () => {
+    this.handleEncodeSave();
+    this.setState({
+      saveMode: !this.state.saveMode,
+    });
   };
 
   render() {
@@ -463,6 +472,7 @@ class GameContainer extends Component {
           lastNaturalRoll={this.state.lastNaturalRoll}
           achieveMode={this.handleAchieveMode}
           achieveBonus={this.state.achieveBonus}
+          saveMode={this.handleSaveMode}
         />
         {!this.state.achieveMode ? (
           <div className="playContainer">
@@ -488,6 +498,9 @@ class GameContainer extends Component {
         {this.state.achieveAlert ? (
           <AchieveAlert achievement={this.state.lastAchievement} />
         ) : null}
+        {/* {this.state.saveMode ? (
+          <SaveTab saveText={this.state.saveText} />
+        ) : null} */}
       </div>
     );
   }
